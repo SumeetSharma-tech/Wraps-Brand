@@ -2,7 +2,6 @@
 
 import React from "react";
 import Logo from '../../../public/images/LOGO/2ND LOGO GREEN 2.png';
-import { Discord, Twitter, Linkedin, Youtube } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
