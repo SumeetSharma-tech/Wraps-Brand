@@ -3,7 +3,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import localFont from "next/font/local";
 import Img from "../../../public/images/card.webp";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const JersyFont = localFont({
   src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
@@ -26,7 +25,6 @@ const sampleDrinks: Drink[] = [
   { id: 6, name: "Hazelnut Cappuccino", image: Img.src, price: 219 },
   { id: 7, name: "Cinnamon Spice", image: Img.src, price: 179 },
   { id: 8, name: "Coconut Macchiato", image: Img.src, price: 249 },
-  // extra for variety
   { id: 9, name: "Almond Breve", image: Img.src, price: 239 },
 ];
 
@@ -52,67 +50,52 @@ const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
           {drink.name}
         </h2>
       </div>
-
-      <div className="absolute bottom-3 right-3 w-6 h-6 rounded-full bg-white group-hover:bg-lime-400 flex items-center justify-center">
-        <svg
-          className="w-5 h-5 text-black"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-        >
-          <path
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M7 17l10-10M7 7h10v10"
-          />
-        </svg>
-      </div>
     </a>
   );
 };
 
 export default function HorizontalScrollableCards() {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef1 = useRef<HTMLDivElement | null>(null);
+
   const [currentIndex, setCurrentIndex] = useState(1);
   const [currentIndex1, setCurrentIndex1] = useState(1);
 
-  const scrollBy = (dir: "left" | "right") => {
-    const el = containerRef.current;
-    if (!el) return;
-    const cardWidth = 280; // card width + gap estimate
-    const scrollAmount = dir === "left" ? -cardWidth * 2 : cardWidth * 2;
-    el.scrollBy({ left: scrollAmount, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    const container = containerRef.current;
+  const setupScrollHandler = (
+    container: HTMLDivElement | null,
+    setter: React.Dispatch<React.SetStateAction<number>>
+  ) => {
     if (!container) return;
 
     const handleScroll = () => {
       const scrollLeft = container.scrollLeft;
       const containerWidth = container.offsetWidth;
       const scrollWidth = container.scrollWidth;
-      
-      // Calculate progress as a percentage and convert to card index
+
       const scrollProgress = scrollLeft / (scrollWidth - containerWidth);
       const currentCard = Math.ceil(scrollProgress * sampleDrinks.length) || 1;
-      
-      setCurrentIndex(Math.min(Math.max(currentCard, 1), sampleDrinks.length));
-      setCurrentIndex1(Math.min(Math.max(currentCard, 1), sampleDrinks.length));
+
+      setter(Math.min(Math.max(currentCard, 1), sampleDrinks.length));
     };
 
-    // Initial calculation
     handleScroll();
-
-    container.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
+    container.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      container.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
-  }, [sampleDrinks.length]);
+  };
+
+  useEffect(() => {
+    const cleanup1 = setupScrollHandler(containerRef.current, setCurrentIndex);
+    const cleanup2 = setupScrollHandler(containerRef1.current, setCurrentIndex1);
+    return () => {
+      cleanup1 && cleanup1();
+      cleanup2 && cleanup2();
+    };
+  }, []);
 
   return (
     <div className={`w-full text-white`}>
@@ -165,7 +148,7 @@ export default function HorizontalScrollableCards() {
         {/* Horizontal scroll container */}
         
         <div
-          ref={containerRef}
+          ref={containerRef1}
           className="flex grid-cols-2 ml-0 mr-0 md:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-8 xl:ml-30 xl:mr-30 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 py-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded"
           style={{ scrollSnapType: "x mandatory" }}
           role="list"
