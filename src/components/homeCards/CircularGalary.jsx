@@ -1,6 +1,7 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
 import { useEffect, useRef } from "react";
 
+
 function debounce(func, wait) {
   let timeout;
   return function (...args) {
@@ -43,20 +44,20 @@ function createTextTexture(gl, text, font = "bold 30px monospace", color = "blac
 }
 
 class Title {
-  constructor({ gl, plane, renderer, text, textColor = "#545050", font = "30px sans-serif" }) {
+  constructor({ gl, plane, renderer, text, level, textColor = "#545050", font = "30px sans-serif" }) {
     autoBind(this);
     this.gl = gl;
     this.plane = plane;
     this.renderer = renderer;
     this.text = text;
+    this.level = level; // our second text
     this.textColor = textColor;
     this.font = font;
-    this.createMesh();
+    this.createMeshes();
   }
-  createMesh() {
-    const { texture, width, height } = createTextTexture(this.gl, this.text, this.font, this.textColor);
-    const geometry = new Plane(this.gl);
-    const program = new Program(this.gl, {
+
+  makeProgram(texture) {
+    return new Program(this.gl, {
       vertex: `
         attribute vec3 position;
         attribute vec2 uv;
@@ -81,15 +82,41 @@ class Title {
       uniforms: { tMap: { value: texture } },
       transparent: true,
     });
-    this.mesh = new Mesh(this.gl, { geometry, program });
-    const aspect = width / height;
-    const textHeight = this.plane.scale.y * 0.15;
-    const textWidth = textHeight * aspect;
-    this.mesh.scale.set(textWidth, textHeight, 1);
-    this.mesh.position.y = -this.plane.scale.y * 0.5 - textHeight * 0.5 - 0.05;
-    this.mesh.setParent(this.plane);
+  }
+
+  createMeshes() {
+    // --- main text ---
+    const main = createTextTexture(this.gl, this.text, this.font, this.textColor);
+    const mainGeometry = new Plane(this.gl);
+    const mainProgram = this.makeProgram(main.texture);
+
+    this.meshText = new Mesh(this.gl, { geometry: mainGeometry, program: mainProgram });
+    const aspectText = main.width / main.height;
+    const textHeight = this.plane.scale.y * 0.2;
+    const textWidth = textHeight * aspectText;
+    this.meshText.scale.set(textWidth, textHeight, 1);
+    this.meshText.position.y = -this.plane.scale.y * 0.5 - textHeight * 0.5 - 0.05;
+    this.meshText.setParent(this.plane);
+
+    // --- level text ---
+    if (this.level) {
+      const level = createTextTexture(this.gl, this.level, this.font, this.textColor);
+      const levelGeometry = new Plane(this.gl);
+      const levelProgram = this.makeProgram(level.texture);
+
+      this.meshLevel = new Mesh(this.gl, { geometry: levelGeometry, program: levelProgram });
+      const aspectLevel = level.width / level.height;
+      const levelHeight = textHeight ;
+      const levelWidth = levelHeight * aspectLevel*1.2;
+      this.meshLevel.scale.set(levelWidth, levelHeight, 1);
+      // place a bit lower than the main text
+      this.meshLevel.position.y = this.meshText.position.y - levelHeight*0.5;
+      this.meshLevel.setParent(this.plane);
+    }
   }
 }
+
+
 
 class Media {
   constructor({
@@ -102,6 +129,7 @@ class Media {
     scene,
     screen,
     text,
+    level,
     viewport,
     bend,
     textColor,
@@ -118,6 +146,7 @@ class Media {
     this.scene = scene;
     this.screen = screen;
     this.text = text;
+    this.level = level; // store level text
     this.viewport = viewport;
     this.bend = bend;
     this.textColor = textColor;
@@ -212,6 +241,7 @@ class Media {
       plane: this.plane,
       renderer: this.renderer,
       text: this.text,
+      level: this.level,
       textColor: this.textColor,
       fontFamily: this.font,
     });
@@ -267,8 +297,8 @@ class Media {
     }
     this.scale = this.screen.height / 1500;
     this.scale = this.screen.height / 1500;
-this.plane.scale.y = (this.viewport.height * (1000 * this.scale)) / this.screen.height;
-this.plane.scale.x = (this.viewport.width * (800 * this.scale)) / this.screen.width;
+this.plane.scale.y = (this.viewport.height * (800 * this.scale)) / this.screen.height;
+this.plane.scale.x = (this.viewport.width * (600 * this.scale)) / this.screen.width;
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
     this.padding = 2;
     this.width = this.plane.scale.x + this.padding;
@@ -349,6 +379,7 @@ class App {
         scene: this.scene,
         screen: this.screen,
         text: data.text,
+        level:data.level,
         viewport: this.viewport,
         bend,
         textColor,
@@ -374,12 +405,19 @@ class App {
     this.isDown = false;
     this.onCheck();
   }
-  onWheel(e) {
-  const delta = e.deltaY || e.wheelDelta || e.detail;
-  // Flip the scroll direction by negating the speed
-  this.scroll.target += delta > 0 ? -this.scrollSpeed : this.scrollSpeed;
-  this.onCheckDebounce();
+ onWheel(e) {
+  // Only handle horizontal gestures, ignore vertical
+  const horizontal = e.deltaX;
+  const vertical = e.deltaY;
+
+  if (Math.abs(horizontal) > Math.abs(vertical)) {
+    // scale horizontal movement to your scrollSpeed
+    this.scroll.target += horizontal * 0.2; // tweak 0.2 to desired sensitivity
+    this.onCheckDebounce();
+  }
 }
+
+
   onCheck() {
     if (!this.medias || !this.medias[0]) return;
     const width = this.medias[0].width;
