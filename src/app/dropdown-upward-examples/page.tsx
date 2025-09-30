@@ -152,7 +152,7 @@ export default function DropdownUpwardExamples() {
       <div className="pt-32 space-y-6">
         <h2 className="text-2xl font-semibold">Test Auto-positioning at Bottom</h2>
         <p className="text-sm text-gray-600">
-          These dropdowns should automatically appear upward since they're near the bottom of the viewport.
+          These dropdowns should automatically appear upward since they&apos;re near the bottom of the viewport.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -199,7 +199,7 @@ export default function DropdownUpwardExamples() {
       <div className="space-y-4 p-6 bg-gray-50 rounded-lg mt-16">
         <h3 className="text-lg font-semibold">How to Control Dropdown Direction</h3>
         <div className="space-y-2 text-sm text-gray-700">
-          <p><strong>Auto-positioning (Default):</strong> Don't set <code>dropupMode</code> - the dropdown will automatically choose the best direction based on available space.</p>
+          <p><strong>Auto-positioning (Default):</strong> Don&apos;t set <code>dropupMode</code> - the dropdown will automatically choose the best direction based on available space.</p>
           <p><strong>Force Upward:</strong> Set <code>dropupMode={`{true}`}</code> to always show the dropdown above the button.</p>
           <p><strong>Force Downward:</strong> Set <code>dropupMode={`{false}`}</code> to always show the dropdown below the button.</p>
           
