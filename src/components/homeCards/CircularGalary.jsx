@@ -54,6 +54,8 @@ class Title {
     this.textColor = textColor;
     this.font = font;
     this.createMeshes();
+    // Start with text hidden by default
+    this.hide();
   }
 
   makeProgram(texture) {
@@ -112,6 +114,24 @@ class Title {
       // place a bit lower than the main text
       this.meshLevel.position.y = this.meshText.position.y - levelHeight*0.5;
       this.meshLevel.setParent(this.plane);
+    }
+  }
+
+  show() {
+    if (this.meshText) {
+      this.meshText.visible = true;
+    }
+    if (this.meshLevel) {
+      this.meshLevel.visible = true;
+    }
+  }
+
+  hide() {
+    if (this.meshText) {
+      this.meshText.visible = false;
+    }
+    if (this.meshLevel) {
+      this.meshLevel.visible = false;
     }
   }
 }
@@ -252,6 +272,31 @@ class Media {
     const x = this.plane.position.x;
     const H = this.viewport.width / 2;
 
+    // Calculate scale based on distance from center
+    const centerDistance = Math.abs(x);
+    const maxDistance = this.viewport.width * 0.5; // Max distance for scale effect
+    const minScale = 0.7; // Minimum scale for non-center cards
+    const maxScale = 1.2; // Maximum scale for center card
+    
+    // Calculate scale factor (1.0 at center, decreasing as distance increases)
+    const normalizedDistance = Math.min(centerDistance / maxDistance, 1);
+    const scaleFactor = maxScale - (maxScale - minScale) * normalizedDistance;
+    
+    // Show/hide text based on center proximity
+    const centerThreshold = this.viewport.width * 0.1; // Threshold for showing text
+    if (centerDistance < centerThreshold) {
+      this.title.show();
+    } else {
+      this.title.hide();
+    }
+    
+    // Apply scale to both x and y for uniform scaling
+    this.plane.scale.x = this.baseScaleX * scaleFactor;
+    this.plane.scale.y = this.baseScaleY * scaleFactor;
+    
+    // Update program uniforms with new scale
+    this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
+
     if (this.bend === 0) {
       this.plane.position.y = 0;
       this.plane.rotation.z = 0;
@@ -296,9 +341,14 @@ class Media {
       }
     }
     this.scale = this.screen.height / 1500;
-    this.scale = this.screen.height / 1500;
-this.plane.scale.y = (this.viewport.height * (800 * this.scale)) / this.screen.height;
-this.plane.scale.x = (this.viewport.width * (600 * this.scale)) / this.screen.width;
+    // Store base scale values for use in update method
+    this.baseScaleY = (this.viewport.height * (800 * this.scale)) / this.screen.height;
+    this.baseScaleX = (this.viewport.width * (600 * this.scale)) / this.screen.width;
+    
+    // Set initial scale (will be updated in update method)
+    this.plane.scale.y = this.baseScaleY;
+    this.plane.scale.x = this.baseScaleX;
+    
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
     this.padding = 2;
     this.width = this.plane.scale.x + this.padding;

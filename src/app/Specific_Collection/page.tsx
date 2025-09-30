@@ -37,15 +37,15 @@ const Specific_Collection = () => {
     return (
         <>
             <Navbar />
-        <div className="w-full flex justify-center items-center">
+        <div className="w-full flex justify-center items-center mt-5">
                 <h1
-                  className={`${JersyFont.className} text-[#9AE600] text-5xl  sm:text-8xl mt-6 -mb-8 md:text-6xl lg:text-8xl`}
+                  className={`${JersyFont.className} text-[#9AE600] text-5xl  sm:text-6 xl:text-7xl mt-6 -mb-8 md:text-6xl lg:text-8xl`}
                 >
                   SPIDERMAN
                 </h1>
               </div>
-              <div className="w-full flex -mt-10 sm:-mt-23 justify-center items-center pb-20 ">
-                <div className="w-full relative h-[330px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
+              <div className="w-full flex md:-mt-20 justify-center items-center pb-20 -mt-5 ">
+                <div className="w-full relative h-[340px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
                   <CircularGallery
                   items={defaultItems}
                     bend={3}
@@ -56,7 +56,7 @@ const Specific_Collection = () => {
                   />
                 </div>
               </div>
-              <div className='w-full flex mb-10 -mt-10'>
+              <div className='  fixed bottom-4 left-2 sm:left-0 z-50 '>
                 <div className="space-y-2 ml-2 sm:ml-10">
                              <DropdownButton
                                           options={categories}
