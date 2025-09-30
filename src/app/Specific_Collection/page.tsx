@@ -57,7 +57,7 @@ const Specific_Collection = () => {
                 </div>
               </div>
               <div className='w-full flex mb-10 -mt-10'>
-                <div className="space-y-2 ml-10">
+                <div className="space-y-2 ml-2 sm:ml-10">
                              <DropdownButton
                                           options={categories}
                                           placeholder="Select Model"
