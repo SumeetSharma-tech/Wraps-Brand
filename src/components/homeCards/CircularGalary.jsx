@@ -204,11 +204,27 @@ class Media {
         uniform vec2 uPlaneSizes;
         uniform sampler2D tMap;
         uniform float uBorderRadius;
+        uniform float uBlur;
         varying vec2 vUv;
         
         float roundedBoxSDF(vec2 p, vec2 b, float r) {
           vec2 d = abs(p) - b;
           return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
+        }
+        
+        vec4 blur(sampler2D texture, vec2 uv, float blurAmount) {
+          vec4 color = vec4(0.0);
+          float total = 0.0;
+          
+          for(float x = -4.0; x <= 4.0; x += 1.0) {
+            for(float y = -4.0; y <= 4.0; y += 1.0) {
+              vec2 offset = vec2(x, y) * blurAmount * 0.001;
+              color += texture2D(texture, uv + offset);
+              total += 1.0;
+            }
+          }
+          
+          return color / total;
         }
         
         void main() {
@@ -220,7 +236,13 @@ class Media {
             vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
             vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
           );
-          vec4 color = texture2D(tMap, uv);
+          
+          vec4 color;
+          if(uBlur > 0.0) {
+            color = blur(tMap, uv, uBlur);
+          } else {
+            color = texture2D(tMap, uv);
+          }
           
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           if(d > 0.0) {
@@ -237,6 +259,7 @@ class Media {
         uSpeed: { value: 0 },
         uTime: { value: 100 * Math.random() },
         uBorderRadius: { value: this.borderRadius },
+        uBlur: { value: 0 },
       },
       transparent: true,
     });
@@ -267,13 +290,18 @@ class Media {
     });
   }
   update(scroll, direction) {
+    // Add extra spacing when card is center
+    const centerDistance = Math.abs(this.x - scroll.current - this.extra);
+    const centerThreshold = this.viewport.width * 0.1;
+    const isCenter = centerDistance < centerThreshold;
+    const extraSpacing = isCenter ? 1 : 1; // Add 7px equivalent extra spacing for center
+    
     this.plane.position.x = this.x - scroll.current - this.extra;
 
     const x = this.plane.position.x;
     const H = this.viewport.width / 2;
 
     // Calculate scale based on distance from center
-    const centerDistance = Math.abs(x);
     const maxDistance = this.viewport.width * 0.5; // Max distance for scale effect
     const minScale = 0.7; // Minimum scale for non-center cards
     const maxScale = 1.2; // Maximum scale for center card
@@ -283,12 +311,15 @@ class Media {
     const scaleFactor = maxScale - (maxScale - minScale) * normalizedDistance;
     
     // Show/hide text based on center proximity
-    const centerThreshold = this.viewport.width * 0.1; // Threshold for showing text
-    if (centerDistance < centerThreshold) {
+    if (isCenter) {
       this.title.show();
     } else {
       this.title.hide();
     }
+    
+    // Apply blur effect to non-center cards
+    const blurAmount = isCenter ? 0 : Math.min(normalizedDistance * 8, 8); // Max blur of 8
+    this.program.uniforms.uBlur.value = blurAmount;
     
     // Apply scale to both x and y for uniform scaling
     this.plane.scale.x = this.baseScaleX * scaleFactor;
@@ -350,7 +381,7 @@ class Media {
     this.plane.scale.x = this.baseScaleX;
     
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.padding = 2;
+    this.padding = 2.5; // Increased padding for better spacing around center card
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
