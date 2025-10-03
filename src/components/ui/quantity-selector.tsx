@@ -34,16 +34,41 @@ export function QuantitySelector({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value);
-    if (!isNaN(value) && value >= min && value <= max) {
-      setQuantity(value);
-      onChange?.(value);
+    const inputValue = e.target.value;
+    
+    // Allow empty string temporarily for editing
+    if (inputValue === '') {
+      setQuantity(0);
+      return;
+    }
+    
+    const value = parseInt(inputValue, 10);
+    if (!isNaN(value)) {
+      if (value >= min && value <= max) {
+        setQuantity(value);
+        onChange?.(value);
+      } else if (value < min) {
+        setQuantity(min);
+        onChange?.(min);
+      } else if (value > max) {
+        setQuantity(max);
+        onChange?.(max);
+      }
+    }
+  };
+
+  const handleInputBlur = () => {
+    // If quantity is 0 or less than min, reset to min value
+    if (quantity < min) {
+      setQuantity(min);
+      onChange?.(min);
     }
   };
 
   return (
     <div className="flex h-[80%] items-center border border-gray-300 rounded-md">
       <button
+        type="button"
         onClick={handleDecrease}
         disabled={quantity <= min}
         className="p-1 sm:p-2 hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -53,14 +78,16 @@ export function QuantitySelector({
       
       <input
         type="number"
-        value={quantity}
+        value={quantity.toString().replace(/^0+/, '') || '0'}
         onChange={handleInputChange}
+        onBlur={handleInputBlur}
         min={min}
         max={max}
-        className="w-6 sm:w-12 text-center border-0 focus:outline-none focus:ring-0"
+        className="w-8 sm:w-12 text-center border-0 focus:outline-none focus:ring-0 bg-transparent"
       />
       
       <button
+        type="button"
         onClick={handleIncrease}
         disabled={quantity >= max}
         className="p-1 sm:p-2 hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"

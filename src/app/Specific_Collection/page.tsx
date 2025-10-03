@@ -97,9 +97,9 @@ const Specific_Collection = () => {
             dropupMode={true}
           />
           <QuantitySelector 
-            initialValue={1}
-            min={1}
-            max={10}
+            initialValue={0}
+            min={0}
+            max={999}
             onChange={handleQuantityChange}
           />
         </div>
