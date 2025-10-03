@@ -6,6 +6,8 @@ import CircularGallery from "@/components//homeCards/CircularGalary";
 
 import { DropdownButton } from "@/components/ui/dropdown-button-upward";
 import { useState } from "react";
+import { QuantitySelector } from "@/components/ui/quantity-selector";
+import {BuyNowButton }   from '@/components/ui/buy-now-button';
 const JersyFont = localFont({
   src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
   display: "swap",
@@ -53,7 +55,7 @@ const Specific_Collection = () => {
       <Navbar />
       <div className="w-full flex justify-center items-center mt-5">
         <h1
-          className={`${JersyFont.className} text-[#9AE600] text-9xl mt-6 -mb-8 `}
+          className={`${JersyFont.className} text-[#9AE600] text-7xl md:text-9xl mt-6 -mb-8 `}
         >
           SPIDERMAN
         </h1>
@@ -70,13 +72,25 @@ const Specific_Collection = () => {
           />
         </div>
       </div>
-      <div className="  fixed bottom-4 left-2 sm:left-0 z-50 ">
-        <div className="space-y-2 ml-2 sm:ml-10">
+      <div className="  fixed bottom-4 flex justify-between left-1 sm:left-0 z-50 w-full ">
+        <div className="space-y-2 flex ml-1 sm:ml-10">
           <DropdownButton
+          className="mr-2"
+            onSelect={(value) => setSelectedCategory(value)}
             options={categories}
             placeholder="Select Model"
             variant="outline"
             dropupMode={true}
+          />
+          <QuantitySelector />
+          
+          
+        </div>
+        <div>
+          <BuyNowButton
+          className='h-10 mr-4'
+            disabled={!selectedCategory}
+
           />
         </div>
       </div>

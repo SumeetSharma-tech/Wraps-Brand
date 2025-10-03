@@ -194,7 +194,8 @@ class Media {
         void main() {
           vUv = uv;
           vec3 p = position;
-          p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
+          // Remove the floating effect by commenting out the wave motion
+          // p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
           gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
         }
       `,
@@ -204,27 +205,11 @@ class Media {
         uniform vec2 uPlaneSizes;
         uniform sampler2D tMap;
         uniform float uBorderRadius;
-        uniform float uBlur;
         varying vec2 vUv;
         
         float roundedBoxSDF(vec2 p, vec2 b, float r) {
           vec2 d = abs(p) - b;
           return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
-        }
-        
-        vec4 blur(sampler2D texture, vec2 uv, float blurAmount) {
-          vec4 color = vec4(0.0);
-          float total = 0.0;
-          
-          for(float x = -4.0; x <= 4.0; x += 1.0) {
-            for(float y = -4.0; y <= 4.0; y += 1.0) {
-              vec2 offset = vec2(x, y) * blurAmount * 0.001;
-              color += texture2D(texture, uv + offset);
-              total += 1.0;
-            }
-          }
-          
-          return color / total;
         }
         
         void main() {
@@ -237,15 +222,7 @@ class Media {
             vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
           );
           
-          vec4 color;
-          if(uBlur > 0.0) {
-  vec4 blurred = blur(tMap, uv, uBlur);
-  vec3 grey = vec3(0.5); // mid grey
-  color = mix(blurred, vec4(grey, 1.0), 0.6); // adjust 0.6 for stronger grey tint
-} else {
-  color = texture2D(tMap, uv);
-}
-
+          vec4 color = texture2D(tMap, uv);
           
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           if(d > 0.0) {
@@ -307,7 +284,7 @@ class Media {
     // Calculate scale based on distance from center
     const maxDistance = this.viewport.width * 0.6; // Max distance for scale effect
     const minScale = 0.7; // Minimum scale for non-center cards
-    const maxScale = 1.4; // Maximum scale for center card
+    const maxScale = 1.2; // Maximum scale for center card
     
     // Calculate scale factor (1.0 at center, decreasing as distance increases)
     const normalizedDistance = Math.min(centerDistance / maxDistance, 1);
@@ -320,9 +297,6 @@ class Media {
       this.title.hide();
     }
     
-    // Apply blur effect to non-center cards
-    const blurAmount = isCenter ? 0 : Math.min(normalizedDistance * 8, 8); // Max blur of 8
-    this.program.uniforms.uBlur.value = blurAmount;
     
     // Apply scale to both x and y for uniform scaling
     this.plane.scale.x = this.baseScaleX * scaleFactor;
@@ -384,7 +358,7 @@ class Media {
     this.plane.scale.x = this.baseScaleX;
     
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.padding = 2.5; // Increased padding for better spacing around center card
+    this.padding = 4; // Increased padding for better spacing around center card
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
@@ -427,7 +401,7 @@ class App {
   createCamera() {
     this.camera = new Camera(this.gl);
     this.camera.fov = 45;
-    this.camera.position.z = 20;
+    this.camera.position.z = 25; // Increased from 20 to 25
   }
   createScene() {
     this.scene = new Transform();
@@ -435,7 +409,7 @@ class App {
   createGeometry() {
     this.planeGeometry = new Plane(this.gl, {
       heightSegments: 50,
-      widthSegments: 100,
+      widthSegments: 120,
     });
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
@@ -518,8 +492,8 @@ class App {
     this.camera.perspective({
       aspect: this.screen.width / this.screen.height,
     });
-    const fov = (this.camera.fov * Math.PI) / 190;
-    const height = 1.9 * Math.tan(fov / 2) * this.camera.position.z;
+    const fov = (this.camera.fov * Math.PI) / 180; // Changed from 190 to 180
+    const height = 2.2 * Math.tan(fov / 2) * this.camera.position.z; // Changed from 1.9 to 2.2
     const width = height * this.camera.aspect;
     this.viewport = { width, height };
     if (this.medias) {
@@ -586,5 +560,5 @@ export default function CircularGallery({
       app.destroy();
     };
   }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
-  return <div className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />;
+  return <div className="w-[100%] h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />;
 }
