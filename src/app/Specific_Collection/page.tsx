@@ -14,7 +14,7 @@ const JersyFont = localFont({
 });
 
 const Specific_Collection = () => {
-  const defaultItems = [
+  const defaultItems = useMemo(() => [
     {
       image: `https://ik.imagekit.io/wr6ziyjiu/product1.jpg?updatedAt=1752859784998`,
       text: "Original",
@@ -40,7 +40,7 @@ const Specific_Collection = () => {
       text: "IRON MAN",
       level: "level 1",
     },
-  ];
+  ], []);
 
   const categories = useMemo(() => [
     { value: "gaming", label: "Gaming Wraps" },
@@ -50,6 +50,20 @@ const Specific_Collection = () => {
     { value: "vintage", label: "Vintage Style" },
   ], []);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const handleCategorySelect = (option: { value: string; label: string }) => {
+    setSelectedCategory(option.value);
+  };
+
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+  };
+
+  const handleBuyNow = () => {
+    console.log("Buy Now clicked", { selectedCategory, quantity });
+  };
+
   return (
     <>
       <Navbar />
@@ -76,16 +90,25 @@ const Specific_Collection = () => {
         <div className="space-y-2 flex ml-1 sm:ml-10">
           <DropdownButton
             className="mr-2"
-            onSelect={(option) => setSelectedCategory(option.value)}
+            onSelect={handleCategorySelect}
             options={categories}
             placeholder="Select Model"
             variant="outline"
             dropupMode={true}
           />
-          <QuantitySelector />
+          <QuantitySelector 
+            initialValue={1}
+            min={1}
+            max={10}
+            onChange={handleQuantityChange}
+          />
         </div>
         <div>
-          <BuyNowButton className="h-9 mr-4" disabled={!selectedCategory} />
+          <BuyNowButton 
+            className="h-9 mr-4" 
+            disabled={!selectedCategory}
+            onClick={handleBuyNow}
+          />
         </div>
       </div>
     </>
