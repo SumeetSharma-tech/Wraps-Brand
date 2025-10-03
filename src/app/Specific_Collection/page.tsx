@@ -53,13 +53,13 @@ const Specific_Collection = () => {
       <Navbar />
       <div className="w-full flex justify-center items-center mt-5">
         <h1
-          className={`${JersyFont.className} text-[#9AE600] text-5xl  sm:text-6 xl:text-7xl mt-6 -mb-8 md:text-6xl lg:text-8xl`}
+          className={`${JersyFont.className} text-[#9AE600] text-9xl mt-6 -mb-8 `}
         >
           SPIDERMAN
         </h1>
       </div>
-      <div className="w-full flex md:-mt-20 justify-center items-center pb-20 -mt-5 ">
-        <div className="w-full relative h-[340px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
+      <div className="w-full flex  justify-center items-center pb-30 ">
+        <div className="w-full relative h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
           <CircularGallery
             items={defaultItems}
             bend={3}
