@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import CircularGallery from "@/components//homeCards/CircularGalary";
 
 import { DropdownButton } from "@/components/ui/dropdown-button-upward";
-import { useState } from "react";
+import { useState,useMemo } from "react";
 import { QuantitySelector } from "@/components/ui/quantity-selector";
 import { BuyNowButton } from "@/components/ui/buy-now-button";
 const JersyFont = localFont({
@@ -42,13 +42,13 @@ const Specific_Collection = () => {
     },
   ];
 
-  const categories = [
+  const categories = useMemo(() => [
     { value: "gaming", label: "Gaming Wraps" },
     { value: "nature", label: "Nature Themes" },
     { value: "abstract", label: "Abstract Designs" },
     { value: "minimalist", label: "Minimalist" },
     { value: "vintage", label: "Vintage Style" },
-  ];
+  ], []);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   return (
     <>
