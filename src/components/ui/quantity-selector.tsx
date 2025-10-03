@@ -10,9 +10,9 @@ interface QuantitySelectorProps {
 }
 
 export function QuantitySelector({
-  initialValue = 1,
-  min = 1,
-  max = 10,
+  initialValue = 0,
+  min = 0,
+  max = 999,
   onChange
 }: QuantitySelectorProps) {
   const [quantity, setQuantity] = useState(initialValue);
@@ -46,7 +46,7 @@ export function QuantitySelector({
       <button
         onClick={handleDecrease}
         disabled={quantity <= min}
-        className="p-2 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="p-1 sm:p-2 hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <ChevronDown className="w-4 h-4" />
       </button>
@@ -57,13 +57,13 @@ export function QuantitySelector({
         onChange={handleInputChange}
         min={min}
         max={max}
-        className="w-12 text-center border-0 focus:outline-none focus:ring-0"
+        className="w-6 sm:w-12 text-center border-0 focus:outline-none focus:ring-0"
       />
       
       <button
         onClick={handleIncrease}
         disabled={quantity >= max}
-        className="p-2 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="p-1 sm:p-2 hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <ChevronUp className="w-4 h-4" />
       </button>

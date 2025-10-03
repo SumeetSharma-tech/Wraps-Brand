@@ -85,7 +85,7 @@ const Specific_Collection = () => {
           <QuantitySelector />
         </div>
         <div>
-          <BuyNowButton className="h-10 mr-4" disabled={!selectedCategory} />
+          <BuyNowButton className="h-9 mr-4" disabled={!selectedCategory} />
         </div>
       </div>
     </>
