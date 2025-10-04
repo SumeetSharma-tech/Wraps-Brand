@@ -287,8 +287,8 @@ const Specific_Collection = () => {
                   </p>
                 ) : section === "Customer Reviews" ? (
                   <p>
-                    ⭐️⭐️⭐️⭐️⭐️ — "Amazing quality and perfect fit! The design looks exactly like the pictures."
-                    <br />⭐️⭐️⭐️⭐️⭐️ — "Easy to apply and no bubbles. Highly recommended!"
+                    ⭐️⭐️⭐️⭐️⭐️ — &ldquo;Amazing quality and perfect fit! The design looks exactly like the pictures.&rdquo;
+                    <br />⭐️⭐️⭐️⭐️⭐️ — &ldquo;Easy to apply and no bubbles. Highly recommended!&rdquo;
                   </p>
                 ) : (
                   <p>
