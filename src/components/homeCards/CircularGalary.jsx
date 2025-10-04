@@ -384,7 +384,7 @@ class App {
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
-    this.onCardChange = onCardChange;
+    this.onCardChange = onCardChange || null;
     this.currentCardIndex = 0;
     this.createRenderer();
     this.createCamera();
@@ -568,7 +568,7 @@ export default function CircularGallery({
   font = "bold 30px Figtree",
   scrollSpeed = 2,
   scrollEase = 0.05,
-  onCardChange = null,
+  onCardChange,
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
