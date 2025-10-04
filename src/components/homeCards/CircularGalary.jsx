@@ -376,6 +376,7 @@ class App {
       font = "bold 30px Figtree",
       scrollSpeed = 2,
       scrollEase = 0.05,
+      onCardChange = null,
     } = {}
   ) {
     document.documentElement.classList.remove("no-js");
@@ -383,6 +384,8 @@ class App {
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
+    this.onCardChange = onCardChange;
+    this.currentCardIndex = 0;
     this.createRenderer();
     this.createCamera();
     this.createScene();
@@ -503,6 +506,19 @@ class App {
   update() {
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
     const direction = this.scroll.current > this.scroll.last ? "right" : "left";
+    
+    // Calculate current center card index
+    if (this.medias && this.medias[0]) {
+      const width = this.medias[0].width;
+      const newCardIndex = Math.round(Math.abs(this.scroll.current) / width) % (this.medias.length / 2);
+      
+      // Notify parent component when center card changes
+      if (newCardIndex !== this.currentCardIndex && this.onCardChange) {
+        this.currentCardIndex = newCardIndex;
+        this.onCardChange(newCardIndex);
+      }
+    }
+    
     if (this.medias) {
       this.medias.forEach((media) => media.update(this.scroll, direction));
     }
@@ -552,13 +568,14 @@ export default function CircularGallery({
   font = "bold 30px Figtree",
   scrollSpeed = 2,
   scrollEase = 0.05,
+  onCardChange = null,
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
-    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase });
+    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, onCardChange });
     return () => {
       app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, onCardChange]);
   return <div className="w-[100%] h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />;
 }
