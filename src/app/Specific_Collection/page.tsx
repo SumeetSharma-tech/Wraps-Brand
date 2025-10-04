@@ -211,16 +211,7 @@ const Specific_Collection = () => {
 
         {/* Game Information */}
         <div 
-          className={`bg-gray-900/30 rounded-lg p-6 border border-gray-800 relative overflow-hidden transition-all duration-300 ${
-            isAnimating ? 'opacity-0' : 'opacity-100'
-          }`}
-          style={{
-            clipPath: isAnimating 
-              ? 'circle(0% at 0% 0%)' 
-              : 'circle(150% at 0% 0%)',
-            transition: 'clip-path 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s, opacity 0.3s ease',
-            transitionDelay: isAnimating ? '0s' : '0.1s'
-          }}
+          className='bg-gray-900/30 rounded-lg p-6 border border-gray-800 relative overflow-hidden'
         >
           <h3 className="text-xl font-bold text-white mb-4">About This Collection</h3>
           <p className="text-gray-300 mb-4">{gameInfo.description}</p>
@@ -246,16 +237,7 @@ const Specific_Collection = () => {
 
         {/* Collapsible Sections */}
         <div 
-          className={`border-t border-gray-800 transition-all duration-300 ${
-            isAnimating ? 'opacity-0' : 'opacity-100'
-          }`}
-          style={{
-            clipPath: isAnimating 
-              ? 'circle(0% at 0% 0%)' 
-              : 'circle(150% at 0% 0%)',
-            transition: 'clip-path 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s, opacity 0.3s ease',
-            transitionDelay: isAnimating ? '0s' : '0.2s'
-          }}
+          className='border-t border-gray-800'
         >
           {["Shipping Info", "Customer Reviews", "Installation Guide"].map((section) => (
             <div key={section} className="border-b border-gray-800 py-4">
