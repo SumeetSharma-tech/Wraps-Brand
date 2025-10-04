@@ -302,7 +302,7 @@ const Specific_Collection = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-4 flex justify-between left-1 sm:left-0 z-50 w-full ">
+      <div className="fixed bottom-0 bg-black flex justify-between left-1 pt-3 mb-0 sm:left-0 z-50 w-full ">
         <div className="space-y-2 flex ml-1 sm:ml-10">
           <DropdownButton
             className="mr-2"
