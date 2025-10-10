@@ -30,12 +30,12 @@ const sampleDrinks: Drink[] = [
   { id: 9, name: "Almond Breve", image: Img.src, price: 239 },
 ];
 
-const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
+const ProductCard: React.FC<{ drink: Drink; onClickPath?: string }> = ({ drink, onClickPath }) => {
   const router = useRouter();
 
   return (
     <a
-      onClick={() => router.push("/Specific_Collection")}
+      onClick={() => router.push(onClickPath ?? "/Specific_Collection")}
       className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[290px] w-[200px] snap-start"
     >
       <div className="relative overflow-hidden rounded-xl h-[290px]">
@@ -93,7 +93,7 @@ export default function GameCollections() {
   // Function to render each horizontal section
   const renderSection = (
     title: string,
-    containerRef: React.RefObject<HTMLDivElement>,
+    containerRef: React.RefObject<HTMLDivElement | null>,
     currentIndex: number,
     setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
   ) => {
@@ -124,7 +124,7 @@ export default function GameCollections() {
           >
             {sampleDrinks.map((d) => (
               <div role="listitem" key={d.id} className="snap-start">
-                <ProductCard drink={d} />
+                <ProductCard drink={d} onClickPath="/Specific_Secction" />
               </div>
             ))}
           </div>
