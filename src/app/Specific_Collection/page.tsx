@@ -6,6 +6,7 @@ import CircularGallery from "@/components/homeCards/CircularGalary";
 import { DropdownButton } from "@/components/ui/dropdown-button-upward";
 import { useState, useMemo, useCallback } from "react";
 import { QuantitySelector } from "@/components/ui/quantity-selector";
+import { useRouter } from "next/navigation";
 import { BuyNowButton } from "@/components/ui/buy-now-button";
 import ProductCard from "@/components/homeCards/ProductCard";
 const JersyFont = localFont({
@@ -14,6 +15,7 @@ const JersyFont = localFont({
 });
 
 const Specific_Collection = () => {
+  const router = useRouter();
   const defaultItems = useMemo(() => [
     {
       image: `https://ik.imagekit.io/wr6ziyjiu/product1.jpg?updatedAt=1752859784998`,
@@ -115,7 +117,8 @@ const Specific_Collection = () => {
   };
 
   const handleBuyNow = () => {
-    console.log("Buy Now clicked", { selectedCategory, quantity, currentCard: currentCard.text });
+    router.push('/mycart');
+
   };
 
   // Function to handle card change from CircularGallery

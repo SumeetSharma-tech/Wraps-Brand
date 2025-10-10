@@ -5,11 +5,12 @@ import Logo from '../../../public/images/LOGO/2ND LOGO GREEN.png';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#0a0a0a] -mt-40 text-gray-300 py-16">
-      <div className="max-w-7xl mx-auto  grid grid-cols-1 sm:grid-cols-4 gap-10">
-        {/* Logo and description */}
-        <div>
-          <div className="flex items-center mb-4">
+    <footer className="bg-[#0a0a0a] text-gray-300 py-16 px-6 md:px-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+        
+        {/* Logo & Description */}
+        <div className="space-y-4">
+          <div className="flex items-center mb-2">
             <img src={Logo.src} alt="Logo" className="h-10 w-10 object-contain" />
             <span className="ml-3 text-2xl font-bold">Phone Wraps</span>
           </div>
@@ -17,20 +18,19 @@ const Footer: React.FC = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Nam vitae quam nec ante fringilla vel at erat convallis elit.
           </p>
-          <div className="flex space-x-3 mt-4">
-  <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/discord-logo.png" alt="Discord" /></a>
-  <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/twitter.png" alt="Twitter" /></a>
-  <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/linkedin.png" alt="LinkedIn" /></a>
-  <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png" alt="YouTube" /></a>
-</div>
-
+          <div className="flex space-x-3 mt-2">
+            <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/discord-logo.png" alt="Discord" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/linkedin.png" alt="LinkedIn" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png" alt="YouTube" /></a>
+          </div>
         </div>
 
         {/* Quick Links */}
-        <div>
-          <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+        <div className="space-y-4">
+          <h3 className="text-white font-semibold mb-2">Quick Links</h3>
           <ul className="space-y-1 text-gray-400 text-sm">
-            <li><a href="#" className="hover:text-white">What is ico</a></li>
+            <li><a href="#" className="hover:text-white">What is ICO</a></li>
             <li><a href="#" className="hover:text-white">Roadmap</a></li>
             <li><a href="#" className="hover:text-white">Whitepaper</a></li>
             <li><a href="#" className="hover:text-white">Social Network</a></li>
@@ -39,21 +39,20 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Supports */}
-        <div>
-          <h3 className="text-white font-semibold mb-4">Supports</h3>
+        <div className="space-y-4">
+          <h3 className="text-white font-semibold mb-2">Supports</h3>
           <ul className="space-y-1 text-sm">
-  <li><a href="#" className="py-1 rounded inline-block hover:bg-blue-700">Setting & Privacy</a></li>
-  <li><a href="#" className="py-1 rounded inline-block hover:bg-blue-700">Help & Support</a></li>
-  <li><a href="#" className="py-1 rounded inline-block hover:bg-blue-700">Terms & Conditions</a></li>
-  <li><a href="#" className="py-1 rounded inline-block hover:bg-blue-700">24/7 Supports</a></li>
-  <li><a href="#" className="py-1 rounded inline-block hover:bg-blue-700">On Point FAQ</a></li>
-</ul>
-
+            <li><a href="#" className="py-1 px-2 rounded inline-block hover:bg-blue-700">Setting & Privacy</a></li>
+            <li><a href="#" className="py-1 px-2 rounded inline-block hover:bg-blue-700">Help & Support</a></li>
+            <li><a href="#" className="py-1 px-2 rounded inline-block hover:bg-blue-700">Terms & Conditions</a></li>
+            <li><a href="#" className="py-1 px-2 rounded inline-block hover:bg-blue-700">24/7 Supports</a></li>
+            <li><a href="#" className="py-1 px-2 rounded inline-block hover:bg-blue-700">On Point FAQ</a></li>
+          </ul>
         </div>
 
         {/* News & Post */}
-        <div>
-          <h3 className="text-white font-semibold mb-4">News & Post</h3>
+        <div className="space-y-4">
+          <h3 className="text-white font-semibold mb-2">News & Post</h3>
           <div className="space-y-4 text-sm">
             <a href="#" className="flex items-center gap-3 hover:text-white">
               <img src="https://picsum.photos/50?random=1" alt="News 1" className="w-12 h-12 object-cover rounded" />
@@ -71,6 +70,18 @@ const Footer: React.FC = () => {
             </a>
           </div>
         </div>
+
+        {/* Extra Section (Optional) */}
+        <div className="space-y-4">
+          <h3 className="text-white font-semibold mb-2">Contact & Info</h3>
+          <ul className="space-y-2 text-gray-400 text-sm">
+            <li>Email: <a href="mailto:info@phonewraps.com" className="hover:text-white">info@phonewraps.com</a></li>
+            <li>Phone: <a href="tel:+1234567890" className="hover:text-white">+1 234 567 890</a></li>
+            <li>Address: 123 Street, City, Country</li>
+            <li>Working Hours: Mon-Fri 9am-6pm</li>
+          </ul>
+        </div>
+
       </div>
     </footer>
   );

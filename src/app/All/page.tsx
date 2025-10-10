@@ -18,7 +18,7 @@ type Drink = {
 const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
   return (
     <a
-      href={`/drinks/${drink.id}`}
+      href={`/specific`}
       className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[290px] w-[200px] snap-start"
     >
       <div className="relative overflow-hidden rounded-xl h-[290px]">
@@ -119,19 +119,7 @@ const drinksToRender = drink;
           <FiltersContent />
         </aside>
 
-        {/* Mobile filter toggle */}
-        <div className="h-10 flex lg:hidden 2xl:hidden items-end justify-end pr-10">
-          <div
-            onClick={() => setIsFilterOpen(true)}
-            className="flex items-center justify-center cursor-pointer w-8 h-8 bg-gradient-to-t from-lime-300 to-lime-600 text-black rounded-full"
-          >
-            <img
-              className="w-5 h-5 object-contain"
-              src="/monster-resources-hackathon/filter-svgrepo-com.svg"
-              alt="Filter"
-            />
-          </div>
-        </div>
+        
 
         {/* Modal for filters on small screens */}
         {isFilterOpen && (
@@ -183,28 +171,46 @@ const drinksToRender = drink;
           </div>
 
           {/* Product Grid */}
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Popular Products</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6">
-              {drinksToRender
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                .map((drink) => (
-                  <Suspense
-                    fallback={
-                      <div className="relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-40">
-                        <FaSpinner />
-                      </div>
-                    }
-                    key={drink.id}
-                  >
-                    <ProductCard drink={drink} />
-                  </Suspense>
-                ))}
+<div>
+  <div className="flex items-center justify-between mb-2">
+    <h2 className="text-2xl font-bold ml-3  md:ml-7 xl:ml-10">Popular Products</h2>
+
+    {/* Mobile filter toggle */}
+    <div className="lg:hidden flex items-center justify-center">
+      <div
+        onClick={() => setIsFilterOpen(true)}
+        className="flex items-center justify-center cursor-pointer w-8 h-8 mr-3 bg-gradient-to-t from-lime-300 to-lime-600 text-black rounded-full"
+      >
+        <img
+          className="w-5 h-5 object-contain"
+          src="/monster-resources-hackathon/filter-svgrepo-com.svg"
+          alt="Filter"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div className="grid grid-cols-2 ml-3 mr-3 md:ml-7 md:mr-7 xl:ml-10 sm:grid-cols-3 xl:grid-cols-4 gap-6 -mb-6">
+    {drinksToRender
+      .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+      .map((drink) => (
+        <Suspense
+          fallback={
+            <div className="relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-40">
+              <FaSpinner />
             </div>
-          </div>
+          }
+          key={drink.id}
+        >
+          <ProductCard drink={drink} />
+        </Suspense>
+      ))}
+  </div>
+</div>
+
 
           {/* Pagination */}
-          <div className="flex justify-center mt-6 gap-2">
+          <div className="flex justify-center mb-8 gap-2">
             {Array.from({ length: Math.ceil(drinksToRender.length / itemsPerPage) }, (_, index) => (
               <button
                 key={index}

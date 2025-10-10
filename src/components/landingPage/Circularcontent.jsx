@@ -10,13 +10,14 @@ const Circularcontent = () => {
   return (
     <>
       <div className="w-full flex justify-center items-center">
-        
-        <h1
-          className={`${JersyFont.className} text-[#9AE600] text-3xl min-[375px]:text-4xl  sm:text-8xl mt-6 -mb-8 md:text-6xl lg:text-8xl`}
-        >
-          WELCOME TO MYSETRY WORLD
-        </h1>
-        
+        <div className="w-full flex justify-center">
+  <h1
+    className={`${JersyFont.className} text-[#9AE600] text-3xl min-[290px]:text-5xl sm:text-7xl lg:text-8xl text-center pt-20`}
+  >
+    WELCOME TO MYSETRY WORLD
+  </h1>
+</div>
+
       </div>
       <div className="w-full flex justify-center items-center pb-20 ">
         <div className="w-full relative h-[330px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
