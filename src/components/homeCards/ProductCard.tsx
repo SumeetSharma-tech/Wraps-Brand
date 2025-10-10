@@ -96,7 +96,7 @@ export default function HorizontalScrollableCards() {
       </div>
 
       <div >
-        <div className="grid grid-cols-1 min-[250px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 sm:ml-20 xl:gap-8 xl:ml-30 xl:mr-30">
+        <div className="grid grid-cols-1 min-[250px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 ml-3 sm:ml-20 xl:gap-8 xl:ml-30 xl:mr-30">
           {sampleDrinks.map((drink) => (
 
             <Suspense

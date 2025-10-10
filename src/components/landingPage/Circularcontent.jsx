@@ -10,6 +10,7 @@ const Circularcontent = () => {
   return (
     <>
       <div className="w-full flex justify-center items-center">
+        
         <h1
           className={`${JersyFont.className} text-[#9AE600] text-3xl min-[375px]:text-4xl  sm:text-8xl mt-6 -mb-8 md:text-6xl lg:text-8xl`}
         >
