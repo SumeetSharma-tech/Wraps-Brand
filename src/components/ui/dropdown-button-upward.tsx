@@ -131,7 +131,7 @@ export function DropdownButton({
         type="button"
         className={cn(
           getButtonVariantClasses(),
-          "w-full min-w-[90px] max-w-[100px]",
+          "w-full min-w-[90px] md:min-w-[200px] max-w-[100px] md:max-w-400px",
           buttonClassName
         )}
         onClick={handleToggleDropdown}

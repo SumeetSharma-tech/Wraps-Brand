@@ -1,5 +1,12 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
 import { useEffect, useRef } from "react";
+import localFont from "next/font/local";
+
+const JersyFont = localFont({
+  src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
+  display: "swap",
+});
+
 
 
 function debounce(func, wait) {
@@ -44,7 +51,7 @@ function createTextTexture(gl, text, font = "bold 30px monospace", color = "blac
 }
 
 class Title {
-  constructor({ gl, plane, renderer, text, level, textColor = "#545050", font = "30px sans-serif" }) {
+  constructor({ gl, plane, renderer, text, level, textColor = "#545050", font = "30px JersyFont" }) {
     autoBind(this);
     this.gl = gl;
     this.plane = plane;
@@ -409,11 +416,28 @@ class App {
   createScene() {
     this.scene = new Transform();
   }
+  onClick(e) {
+  // Detect which card is currently in center (you already track it)
+  const centerIndex = this.currentCardIndex % (this.medias.length / 2);
+  const clickedCard = this.medias[centerIndex];
+
+  if (clickedCard) {
+    // For example: navigate to /gamecollections
+    if (window && window.location) {
+      window.location.href = "/gamecollections";
+    }
+
+    // Optional: if you want per-card routes, you could do:
+    // window.location.href = `/gamecollections/${clickedCard.text.toLowerCase()}`;
+  }
+}
+
   createGeometry() {
     this.planeGeometry = new Plane(this.gl, {
       heightSegments: 50,
       widthSegments: 120,
     });
+    
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
@@ -527,6 +551,8 @@ class App {
     this.raf = window.requestAnimationFrame(this.update.bind(this));
   }
   addEventListeners() {
+    this.boundOnClick = this.onClick.bind(this);
+this.gl.canvas.addEventListener("click", this.boundOnClick);
     this.boundOnResize = this.onResize.bind(this);
     this.boundOnWheel = this.onWheel.bind(this);
     this.boundOnTouchDown = this.onTouchDown.bind(this);
@@ -544,6 +570,7 @@ this.gl.canvas.addEventListener("touchend", this.boundOnTouchUp);
 
   }
   destroy() {
+    this.gl.canvas.removeEventListener("click", this.boundOnClick);
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener("resize", this.boundOnResize);
     window.removeEventListener("mousewheel", this.boundOnWheel);

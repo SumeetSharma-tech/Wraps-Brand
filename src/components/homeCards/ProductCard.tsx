@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, Suspense } from "react";
 import localFont from "next/font/local";
 import Img from "../../../public/images/card.webp";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Suspense, useState } from "react";
-import HorizontalWithProp from '../../components/landingPage/HorizontalWithProp'
+import HorizontalWithProp from "../../components/landingPage/HorizontalWithProp";
 
 const JersyFont = localFont({
   src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
@@ -28,14 +27,13 @@ const sampleDrinks: Drink[] = [
   { id: 6, name: "Hazelnut Cappuccino", image: Img.src, price: 219 },
   { id: 7, name: "Cinnamon Spice", image: Img.src, price: 179 },
   { id: 8, name: "Coconut Macchiato", image: Img.src, price: 249 },
-  // extra for variety
   { id: 9, name: "Almond Breve", image: Img.src, price: 239 },
 ];
 
-const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
+const ProductCard: React.FC<{ drink: Drink; href: string }> = ({ drink, href }) => {
   return (
-     <a
-      href={`/drinks/${drink.id}`}
+    <a
+      href={href}
       className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[280px] w-[190px] md:h-[370px] md:w-[260px] snap-start"
     >
       <div className="relative overflow-hidden rounded-xl h-[300px]">
@@ -80,13 +78,13 @@ export default function HorizontalScrollableCards() {
   const scrollBy = (dir: "left" | "right") => {
     const el = containerRef.current;
     if (!el) return;
-    const cardWidth = 280; // card width + gap estimate
+    const cardWidth = 280;
     const scrollAmount = dir === "left" ? -cardWidth * 2 : cardWidth * 2;
     el.scrollBy({ left: scrollAmount, behavior: "smooth" });
   };
 
   return (
-    <div className={`w-full text-white`}>
+    <div className="w-full text-white">
       <div className="flex items-center justify-center mb-4">
         <h1
           className={`${JersyFont.className} text-[#9AE600] text-3xl min-[290px]:text-5xl sm:text-7xl  lg:text-8xl`}
@@ -95,26 +93,23 @@ export default function HorizontalScrollableCards() {
         </h1>
       </div>
 
-      <div >
+      <div>
         <div className="grid grid-cols-1 min-[250px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 ml-3 sm:ml-20 xl:gap-8 xl:ml-30 xl:mr-30">
-          {sampleDrinks.map((drink) => (
-
+          {sampleDrinks.map((drink, index) => (
             <Suspense
               fallback={
                 <div className="relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg flex flex-col h-[380px] w-[240px]" />
               }
               key={drink.id}
             >
-              <ProductCard drink={drink} />
+              <ProductCard
+                drink={drink}
+                href={index === 0 ? "/gamecollections" : "/All"}
+              />
             </Suspense>
           ))}
         </div>
       </div>
-
-      
-
-
-      
     </div>
   );
 }

@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import Image from "next/image";
 import { CardCarousel } from "../ui/card-carousel";
@@ -7,8 +8,12 @@ import img3 from "../../../public/images/card3.webp";
 import mobileimg from "../../../public/images/mobile.webp";
 import WrapButton from "../ui/wrap-button";
 import { Globe } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+
 
 const CardCarouselParent = () => {
+  const router = useRouter();
   const images = [
     { src: img1.src, alt: "Image 1" },
     { src: img1.src, alt: "Image 2" },
@@ -18,7 +23,8 @@ const CardCarouselParent = () => {
     { src: img1.src, alt: "Image 6" },
   ];
   const handleOnClick = () => {
-    console.log("Button Clicked");
+    
+    router.push('/gamecollections');
   };
 
   return (
@@ -38,7 +44,7 @@ const CardCarouselParent = () => {
       </div>
 
       {/*/Buy Now Button */}
-      <div className="relative bottom-13 flex items-center justify-center left-1/2 transform -translate-x-1/2 z-20">
+      <div onClick={handleOnClick} className="cursor-pointer relative bottom-13 flex items-center justify-center left-1/2 transform -translate-x-1/2 z-20">
             <button className="bg-[#9AE600] text-black text-2xl sm:text-4xl font-bold py-2 px-4 rounded-full hover:bg-green-600 transition duration-300"> 
               BUY NOW
             </button>

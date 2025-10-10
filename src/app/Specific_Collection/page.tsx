@@ -67,13 +67,22 @@ const Specific_Collection = () => {
     },
   ], []);
 
-  const categories = useMemo(() => [
-    { value: "gaming", label: "Gaming Wraps" },
-    { value: "nature", label: "Nature Themes" },
-    { value: "abstract", label: "Abstract Designs" },
-    { value: "minimalist", label: "Minimalist" },
-    { value: "vintage", label: "Vintage Style" },
+  const phonebrand = useMemo(() => [
+    { value: "apple", label: "Apple" },
+    { value: "samsung", label: "Samsung" },
+    { value: "google", label: "Google" },
+    { value: "oneplus", label: "OnePlus" },
+    { value: "xiaomi", label: "Xiaomi" },
   ], []);
+
+  const model = useMemo(() => [
+    { value: "iphone-14", label: "iPhone 14" },
+    { value: "galaxy-s22", label: "Galaxy S22" },
+    { value: "pixel-7", label: "Pixel 7" },
+    { value: "oneplus-10", label: "OnePlus 10" },
+    { value: "mi-11", label: "Mi 11" },
+  ], []);
+
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0);
@@ -289,7 +298,7 @@ const Specific_Collection = () => {
           <DropdownButton
             className="mr-2"
             onSelect={handleCategorySelect}
-            options={categories}
+            options={phonebrand}
             placeholder="Select Brand"
             variant="outline"
             dropupMode={true}
@@ -297,7 +306,7 @@ const Specific_Collection = () => {
           <DropdownButton
             className="mr-2"
             onSelect={handleCategorySelect}
-            options={categories}
+            options={model}
             placeholder="Select Model"
             variant="outline"
             dropupMode={true}

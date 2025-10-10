@@ -63,7 +63,7 @@ const sampleDrinks: Drink[] = [
 const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
   return (
     <a
-      href={`/drinks/${drink.id}`}
+      href={`/All`}
       className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[290px] w-[200px] snap-start"
     >
       <div className="relative overflow-hidden rounded-xl h-[290px]">
@@ -139,7 +139,7 @@ export default function HorizontalScrollableCards() {
 <h1
           className={`${JersyFont.className} text-[#9AE600] text-3xl min-[290px]:text-5xl sm:text-7xl  lg:text-8xl`}
         >
-          BROWSE ALL COLLECTION
+          BROWSE ALL PRODUCTS
         </h1>
 
       </div>
@@ -149,7 +149,7 @@ export default function HorizontalScrollableCards() {
 
         <div
           ref={containerRef}
-          className="flex grid-cols-2 ml-0 mr-0 md:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-8 xl:ml-30 xl:mr-30 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 py-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded"
+          className="flex grid-cols-2 ml-3 mr-0 md:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-8 xl:ml-30 xl:mr-30 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 py-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded"
           style={{ scrollSnapType: "x mandatory" }}
           role="list"
         >
@@ -186,7 +186,7 @@ export default function HorizontalScrollableCards() {
 
         <div
           ref={containerRef1}
-          className="flex grid-cols-2 ml-0 mr-0 md:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-8 xl:ml-30 xl:mr-30 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 py-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded"
+          className="flex grid-cols-2 ml-3 mr-0 md:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-8 xl:ml-30 xl:mr-30 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 py-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded"
           style={{ scrollSnapType: "x mandatory" }}
           role="list"
         >
