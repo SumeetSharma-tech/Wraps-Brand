@@ -66,7 +66,7 @@ export function QuantitySelector({
   };
 
   return (
-    <div className="flex h-[80%] items-center border border-gray-300 rounded-md">
+    <div className="flex h-[78%] items-center border border-gray-300 rounded-md">
       <button
         type="button"
         onClick={handleDecrease}

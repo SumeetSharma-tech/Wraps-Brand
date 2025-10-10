@@ -290,6 +290,14 @@ const Specific_Collection = () => {
             className="mr-2"
             onSelect={handleCategorySelect}
             options={categories}
+            placeholder="Select Brand"
+            variant="outline"
+            dropupMode={true}
+          />
+          <DropdownButton
+            className="mr-2"
+            onSelect={handleCategorySelect}
+            options={categories}
             placeholder="Select Model"
             variant="outline"
             dropupMode={true}
