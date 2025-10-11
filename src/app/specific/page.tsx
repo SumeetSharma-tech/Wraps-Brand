@@ -314,7 +314,7 @@ const ProductDetails = () => {
           <h2 className="text-2xl font-bold mb-6 text-white">Related Drinks</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
             {relatedDrinks.map((d) => (
-              <ProductCard key={d.id} drink={d} />
+              <ProductCard key={d.id} drink={d} href={`/specific`} />
             ))}
           </div>
         </div>
