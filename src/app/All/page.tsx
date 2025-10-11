@@ -21,7 +21,7 @@ const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
   return (
     <a
       href={`/specific`}
-      className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[290px] w-[200px] snap-start"
+      className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[230px] w-[150px] min-[370px]:w-[180px] min-[370px]:h-[270px] md:h-[370px] md:w-[260px]"
     >
       <div className="relative overflow-hidden rounded-xl h-[290px]">
         <img
