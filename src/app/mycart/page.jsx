@@ -6,11 +6,10 @@ import Navbar from "../../components/navbar/Navbar";
 import IMg from "../../../public/images/card.webp"
 import localFont from "next/font/local";
 
-const Jersey = localFont({
-  src: "../../../public/fonts/Jersey.ttf",
-  variable: "--font-jersey",
+const JersyFont = localFont({
+  src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
+  display: "swap",
 });
-
 const CartPage = () => {
   const cartItems = [
 {
