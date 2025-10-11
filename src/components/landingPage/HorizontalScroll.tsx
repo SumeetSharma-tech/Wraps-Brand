@@ -63,7 +63,7 @@ const sampleDrinks: Drink[] = [
 const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
   return (
     <a
-      href={`/All`}
+      href={`/specific`}
       className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[290px] w-[200px] snap-start"
     >
       <div className="relative overflow-hidden rounded-xl h-[290px]">
