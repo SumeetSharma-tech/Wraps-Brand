@@ -37,8 +37,14 @@ export const animatePageOut = (href: string, router: AppRouterInstance) => {
       duration: 1.3,
       stagger: 0.2,
       onComplete: () => {
+        // Scroll to top before navigation
+        window.scrollTo(0, 0)
         router.push(href)
       },
     })
+  } else {
+    // Fallback if banners don't exist - still scroll to top
+    window.scrollTo(0, 0)
+    router.push(href)
   }
 }

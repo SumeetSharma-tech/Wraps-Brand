@@ -68,28 +68,58 @@ const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
   );
 };
 const ProductDetails = () => {
-  const phonebrand = useMemo(() => [
-      { value: "apple", label: "Apple" },
-      { value: "samsung", label: "Samsung" },
-      { value: "google", label: "Google" },
-      { value: "oneplus", label: "OnePlus" },
-      { value: "xiaomi", label: "Xiaomi" },
-    ], []);
+  // ----- Dropdown data -----
+    const phonebrand = useMemo(
+      () => [
+        { value: "apple", label: "Apple" },
+        { value: "samsung", label: "Samsung" },
+        { value: "google", label: "Google" },
+        { value: "oneplus", label: "OnePlus" },
+        { value: "xiaomi", label: "Xiaomi" },
+      ],
+      []
+    );
   
-    const model = useMemo(() => [
-      { value: "iphone-14", label: "iPhone 14" },
-      { value: "galaxy-s22", label: "Galaxy S22" },
-      { value: "pixel-7", label: "Pixel 7" },
-      { value: "oneplus-10", label: "OnePlus 10" },
-      { value: "mi-11", label: "Mi 11" },
-    ], []);
+    type Brand = "apple" | "samsung" | "google" | "oneplus" | "xiaomi";
+    type ModelOption = { value: string; label: string };
+    const modelsByBrand: Record<string, ModelOption[]> = useMemo(
+      () => ({
+        apple: [
+          { value: "iphone-14", label: "iPhone 14" },
+          { value: "iphone-15", label: "iPhone 15" },
+        ],
+        samsung: [
+          { value: "galaxy-s22", label: "Galaxy S22" },
+          { value: "galaxy-s23", label: "Galaxy S23" },
+        ],
+        google: [
+          { value: "pixel-7", label: "Pixel 7" },
+          { value: "pixel-8", label: "Pixel 8" },
+        ],
+        oneplus: [
+          { value: "oneplus-10", label: "OnePlus 10" },
+          { value: "oneplus-12", label: "OnePlus 12" },
+        ],
+        xiaomi: [
+          { value: "mi-11", label: "Mi 11" },
+          { value: "mi-13", label: "Mi 13" },
+        ],
+      }),
+      []
+    );
   
-    const [selectedCategory, setSelectedCategory] = useState<string>("");
+    const [selectedBrand, setSelectedBrand] = useState<string>("");
+      const [selectedModel, setSelectedModel] = useState<string>("");
     const [quantity, setQuantity] = useState<number>(1);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const handleCategorySelect = (option: { value: string; label: string }) => {
-    setSelectedCategory(option.value);
+  const handleBrandSelect = (option: { value: string; label: string }) => {
+    setSelectedBrand(option.value);
+    setSelectedModel("");
+  };
+
+  const handleModelSelect = (option: { value: string; label: string }) => {
+    setSelectedModel(option.value);
   };
 
   const handleQuantityChange = (newQuantity: number) => {
@@ -189,21 +219,24 @@ const ProductDetails = () => {
   {/* Dropdowns + Quantity */}
   <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 flex-1 mb-4">
     <DropdownButton
-      className="flex-1"
-      onSelect={handleCategorySelect}
-      options={phonebrand}
-      placeholder="Select Brand"
-      variant="outline"
-      dropupMode={true}
-    />
+                className="mr-2"
+                onSelect={handleBrandSelect}
+                options={phonebrand}
+                placeholder="Select Brand"
+                variant="outline"
+                dropupMode={true}
+              />
     <DropdownButton
-      className="flex-1"
-      onSelect={handleCategorySelect}
-      options={phonebrand}
-      placeholder="Select Brand"
-      variant="outline"
-      dropupMode={true}
-    />
+            className="mr-2"
+            onSelect={handleModelSelect}
+            options={selectedBrand ? modelsByBrand[selectedBrand] : []}
+            placeholder={
+              selectedBrand ? "Select Model" : "Select Brand First"
+            }
+            variant="outline"
+            dropupMode={true}
+            disabled={!selectedBrand}
+          />
     
   </div>
 

@@ -15,7 +15,7 @@ export default function Review() {
     <>
     <div className={`{${JersyFont.className} flex justify-center items-center mt-2`}>
         <h1
-          className={`${JersyFont.className} text-[#9AE600] text-3xl sm:text-5xl md:text-6xl xl:text-8xl  mt-4 `}
+          className={`${JersyFont.className} pl-2 text-[#9AE600] text-3xl sm:text-5xl md:text-6xl xl:text-8xl  mt-4 `}
         >
           WHAT OUR CUSTOMERS SAYS ABOUT US
         </h1>

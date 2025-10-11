@@ -10,7 +10,7 @@ export default function LeaderBoards() {
     <div className="w-full -mt-5">
       {/* Title */}
       <div className={`${JersyFont.className} flex justify-center items-center`}>
-        <h1 className="text-4xl sm:text-6xl lg:text-8xl text-[#9AE600] mt-20 text-center">
+        <h1 className="text-4xl min-[290px]:text-5xl sm:text-6xl lg:text-8xl text-[#9AE600] mt-20 text-center">
           Climb Up The Ranking
         </h1>
       </div>

@@ -85,36 +85,32 @@ export default function HorizontalScrollableCards() {
 
   return (
     <div className="w-full text-white">
-      <div className="flex items-center justify-center mb-4">
-        <div className="flex items-center justify-center">
-        
-<h1
-          className={`${JersyFont.className} text-[#9AE600] text-3xl min-[290px]:text-5xl sm:text-7xl  lg:text-8xl`}
+  <div className="flex justify-center mb-4">
+    <h1
+      className={`${JersyFont.className} text-[#9AE600] text-4xl min-[300px]:text-5xl sm:text-7xl lg:text-8xl text-center`}
+    >
+      BROWSE ALL COLLECTIONS
+    </h1>
+  </div>
+
+  <div>
+    <div className="grid grid-cols-1 min-[250px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 ml-3 sm:ml-20 xl:gap-8 xl:ml-30 xl:mr-30">
+      {sampleDrinks.map((drink, index) => (
+        <Suspense
+          fallback={
+            <div className="relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg flex flex-col h-[380px] w-[240px]" />
+          }
+          key={drink.id}
         >
-          BROWSE ALL COLLECTIONS
-        </h1>
-
-      </div>
-
-      </div>
-
-      <div>
-        <div className="grid grid-cols-1 min-[250px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 ml-3 sm:ml-20 xl:gap-8 xl:ml-30 xl:mr-30">
-          {sampleDrinks.map((drink, index) => (
-            <Suspense
-              fallback={
-                <div className="relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg flex flex-col h-[380px] w-[240px]" />
-              }
-              key={drink.id}
-            >
-              <ProductCard
-                drink={drink}
-                href={index === 0 ? "/gamecollections" : "/All"}
-              />
-            </Suspense>
-          ))}
-        </div>
-      </div>
+          <ProductCard
+            drink={drink}
+            href={index === 0 ? "/gamecollections" : "/All"}
+          />
+        </Suspense>
+      ))}
     </div>
+  </div>
+</div>
+
   );
 }
