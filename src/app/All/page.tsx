@@ -263,7 +263,15 @@ const drinksToRender = drink;
             {Array.from({ length: Math.ceil(drinksToRender.length / itemsPerPage) }, (_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentPage(index + 1)}
+                onClick={() => {
+                  setCurrentPage(index + 1);
+                  // Scroll to top when changing pages
+                  window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
+                  });
+                }}
                 className={`px-3 py-1 rounded ${
                   currentPage === index + 1
                     ? "bg-lime-400 text-black font-bold"

@@ -13,7 +13,7 @@ import Footer from '@/components/homeCards/Footer'
 
 const page = () => {
   return (
-    <div>
+    <div className="w-full max-w-full overflow-x-hidden">
       <Navbar />
       <TextScrollDemo />
       <HeroContent />
@@ -27,5 +27,6 @@ const page = () => {
     </div>
   )
 }
+
 
 export default page
