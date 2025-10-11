@@ -89,7 +89,7 @@ export default function HorizontalScrollableCards() {
         <div className="flex items-center justify-center">
         
 <h1
-          className={`${JersyFont.className} text-[#9AE600] text-3xl min-[240px]:text-4xl min-[310px]:text-5xl sm:text-7xl  lg:text-8xl`}
+          className={`${JersyFont.className} text-[#9AE600] text-3xl min-[250px]:text-4xl min-[310px]:text-5xl sm:text-7xl  lg:text-8xl`}
         >
           BROWSE ALL COLLECTIONS
         </h1>
