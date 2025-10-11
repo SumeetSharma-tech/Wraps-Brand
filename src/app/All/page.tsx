@@ -110,11 +110,23 @@ const Drinks = () => {
   { id: 39, name: "Iced Americano", image: Img.src, price: 149, Link: "/specific/2" },
   { id: 40, name: "Matcha Frappe", image: Img.src, price: 229, Link: "/specific/3" },
   { id: 41, name: "Vanilla Cold Brew", image: Img.src, price: 189, Link: "/specific/4" },
+  { id: 42, name: "Mocha Delight", image: Img.src, price: 209, Link: "/specific/5" },
+  { id: 43, name: "Hazelnut Cappuccino", image: Img.src, price: 219, Link: "/specific/6" },
+  { id: 44, name: "Cinnamon Spice", image: Img.src, price: 179, Link: "/specific/7" },
+  { id: 45, name: "Coconut Macchiato", image: Img.src, price: 249, Link: "/specific/8" },
+  // extra for variety
+  { id: 46, name: "Almond Breve", image: Img.src, price: 239, Link: "/specific/9" },
+  { id: 47, name: "Caramel Latte", image: Img.src, price: 199, Link: "/specific/1" },
+  { id: 48, name: "Iced Americano", image: Img.src, price: 149, Link: "/specific/2" },
+  { id: 49, name: "Matcha Frappe", image: Img.src, price: 229, Link: "/specific/3" },
+  { id: 50, name: "Vanilla Cold Brew", image: Img.src, price: 189, Link: "/specific/4" },
+  { id: 51, name: "Mocha Delight", image: Img.src, price: 209, Link: "/specific/5" },
+  { id: 52, name: "Hazelnut Cappuccino", image: Img.src, price: 219, Link: "/specific/6" },
   ];
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 40;
 
   // For simplicity, we just render all drinks (no real filtering)
 const drinksToRender = drink;
