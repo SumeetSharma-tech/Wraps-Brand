@@ -30,7 +30,6 @@ const LeaderboardPage = () => {
             {/* Card */}
             <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center w-28 sm:w-36 border border-slate-600">
               <h3 className="text-white font-bold text-sm sm:text-lg mb-1">ThommyTom</h3>
-              <p className="text-gray-300 text-lg sm:text-xl font-bold mb-2 sm:mb-3">18k GXP</p>
               <div className="flex items-center justify-center">
                 <span className="text-emerald-400 font-bold text-sm sm:text-lg">+200</span>
                 <div className="w-3 h-3 sm:w-5 sm:h-5 bg-emerald-400 rounded ml-2"></div>
@@ -57,7 +56,6 @@ const LeaderboardPage = () => {
             {/* Card */}
             <div className="bg-gradient-to-b from-yellow-500/20 to-orange-500/20 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 text-center w-32 sm:w-40 border border-yellow-400/50">
               <h3 className="text-white font-bold text-lg sm:text-xl mb-1">Sparkles</h3>
-              <p className="text-yellow-200 text-xl sm:text-2xl font-bold mb-2 sm:mb-3">32.5k GXP</p>
               <div className="flex items-center justify-center mb-2 sm:mb-3">
                 <span className="text-emerald-400 font-bold text-lg sm:text-xl">+250</span>
                 <div className="w-4 h-4 sm:w-5 sm:h-5 bg-emerald-400 rounded ml-2"></div>
@@ -84,7 +82,6 @@ const LeaderboardPage = () => {
             {/* Card */}
             <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center w-28 sm:w-36 border border-slate-600">
               <h3 className="text-white font-bold text-sm sm:text-lg mb-1">HarryBradley</h3>
-              <p className="text-orange-300 text-lg sm:text-xl font-bold mb-2 sm:mb-3">14k GXP</p>
               <div className="flex items-center justify-center">
                 <span className="text-emerald-400 font-bold text-sm sm:text-lg">+150</span>
                 <div className="w-3 h-3 sm:w-5 sm:h-5 bg-emerald-400 rounded ml-2"></div>
@@ -112,7 +109,6 @@ const LeaderboardPage = () => {
                 <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">ShadowStorm</h4>
               </div>
             </div>
-            <div className="text-cyan-400 font-bold text-xl sm:text-2xl lg:text-3xl">13.9k GXP</div>
           </div>
 
           <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
@@ -127,7 +123,7 @@ const LeaderboardPage = () => {
                 <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">TempestFury</h4>
               </div>
             </div>
-            <div className="text-cyan-400 font-bold text-xl sm:text-2xl lg:text-3xl">13.8k GXP</div>
+            
           </div>
 
           <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center justify-between">
@@ -142,7 +138,7 @@ const LeaderboardPage = () => {
                 <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">FrostyCold</h4>
               </div>
             </div>
-            <div className="text-cyan-400 font-bold text-xl sm:text-2xl lg:text-3xl">13.7k GXP</div>
+            
           </div>
 
           <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
@@ -157,7 +153,7 @@ const LeaderboardPage = () => {
                 <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">Sparkles</h4>
               </div>
             </div>
-            <div className="text-cyan-400 font-bold text-xl sm:text-2xl lg:text-3xl">13.5k GXP</div>
+            
           </div>
 
           <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
@@ -172,7 +168,7 @@ const LeaderboardPage = () => {
                 <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">ArcadeCoinz</h4>
               </div>
             </div>
-            <div className="text-cyan-400 font-bold text-xl sm:text-2xl lg:text-3xl">13.4k GXP</div>
+            
           </div>
         </div>
       </div>
