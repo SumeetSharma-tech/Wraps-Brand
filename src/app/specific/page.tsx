@@ -26,11 +26,12 @@ type Drink = {
 //   { id: 9, name: "Almond Breve", image: Img.src, price: 239 },
 // ];
 
+
 const ProductCard: React.FC<{ drink: Drink; href: string }> = ({ drink, href }) => {
    return (
     <a
       href={href}
-      className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[230px] w-[150px] min-[370px]:w-[180px] min-[370px]:h-[270px] md:h-[370px] md:w-[260px] snap-start"
+      className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[230px] w-[150px] min-[370px]:w-[180px] min-[370px]:h-[270px] md:h-[300px] md:w-[230px] snap-start"
     >
       <div className="relative overflow-hidden rounded-xl h-[300px]">
         <img
@@ -183,10 +184,10 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="bg-[#090701] text-white min-h-screen">
+    <div className="bg-[#090701] text-white overflow-hidden min-h-screen">
       <Navbar />
 
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className=" overflow-hidden max-w-6xl  mx-auto px-6 py-12 -mb-20">
         {/* Breadcrumb */}
         <div className="text-sm text-gray-500 mb-6">
           Home / Drinks / <span className="text-white">{drink.name}</span>
@@ -309,16 +310,24 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        {/* Related Drinks */}
-        <div className="mt-16">
+       
+      </div>
+      <div className=" overflow-hidden flex justify-center max-w-full xl:ml-40  mx-auto px-6 py-12">
+        {/* Breadcrumb */}
+        
+
+        <div className="flex flex-col lg:flex-row gap-10"></div>
+
+      <div className="mt-16">
           <h2 className="text-2xl font-bold mb-6 text-white">Related Drinks</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 mr-2">
             {relatedDrinks.map((d) => (
               <ProductCard key={d.id} drink={d} href={`/specific`} />
             ))}
           </div>
         </div>
-      </div>
+        </div>
+      
     </div>
   );
 };
