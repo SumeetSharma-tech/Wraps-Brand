@@ -4,6 +4,12 @@ import { NavLink } from "react-router-dom";
 import OrderSummary from "../../components/orderSummary";
 import Navbar from "../../components/navbar/Navbar";
 import IMg from "../../../public/images/card.webp"
+import localFont from "next/font/local";
+
+const Jersey = localFont({
+  src: "../../../public/fonts/Jersey.ttf",
+  variable: "--font-jersey",
+});
 
 const CartPage = () => {
   const cartItems = [
@@ -45,7 +51,7 @@ image: IMg,
     <div className="bg-[#090701]">
       <Navbar />
       <div className="min-h-screen text-white px-4 md:px-12 py-8">
-        <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
+        <h1 className={`${Jersey.variable} text-3xl font-bold mb-8`}>Shopping Cart</h1>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Cart Items */}
           <div className="flex-1 bg-[#131313] p-6 rounded-lg">
