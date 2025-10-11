@@ -1,174 +1,224 @@
 'use client'
 import React from 'react';
 import Navbar from '@/components/navbar/Navbar';
+import Image from 'next/image';
+import IMG1 from '../../../public/images/img_image.png'
+import IMG2 from '../../../public/images/img_image_114x114.png'
+import IMG3 from '../../../public/images/img_image_1.png'
 
 const LeaderboardPage = () => {
   return (
-    <div className="min-h-screen bg-[#090701] relative overflow-hidden">
-      {/* Subtle overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-gray-900/10 to-gray-800/20"></div>
-      
+    <div className="min-h-screen bg-[#0e0f15]">
       <Navbar />
       
-      <div className="relative mt-5 z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* Top 3 Podium */}
-        <div className="flex justify-center items-end mb-6 sm:mb-8 gap-2 sm:gap-4 lg:gap-6">
-          {/* 2nd Place */}
-          <div className="flex flex-col items-center">
-            <div className="relative">
+      <div className="w-full max-w-7xl mx-auto pt-8 pb-32">
+        <div className="bg-[#0e0f15] rounded-[40px] overflow-hidden">
+          {/* Main Content */}
+          <div className="relative bg-cover bg-center">
+            {/* Featured Top 3 Users */}
+            <div className="flex flex-col sm:flex-row justify-center items-end gap-8 sm:gap-12 lg:gap-48 px-4 sm:px-16 lg:px-64 pt-16 pb-16">
+              {/* 2nd Place - Brian Ngo */}
+              <div className="flex flex-col items-center gap-8 bg-[rgba(23,28,41,0.8)] backdrop-blur-[10px] rounded-2xl  sm:bg-transparent sm:backdrop-blur-none sm:p-0">
+                <div className="flex flex-col items-center gap-6">
+                  <div className="w-32 h-36 sm:w-36 sm:h-40 lg:w-40 lg:h-44 rounded-xl overflow-hidden">
+                    <Image 
+                      src={IMG1} 
+                      alt="Brian Ngo" 
+                      className='w-full h-full object-cover'
+                      width={160}
+                      height={176}
+                    />
+                  </div>
+                  <h3 className="text-white text-2xl sm:text-3xl font-semibold text-center">Brian Ngo</h3>
+                </div>
+                <div className="flex flex-col items-center gap-8">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-11 h-11 bg-[#cdcdcd] rounded-lg flex items-center justify-center p-2">
+                      <div className="w-6 h-6 bg-gray-800 rounded">🏆</div>
+                    </div>
+                    <span className="text-white text-sm">Earned 2,000 points</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 1st Place - Jolie Joie */}
+               <div className="flex flex-col items-center gap-8 bg-[rgba(23,28,41,0.8)] backdrop-blur-[10px] rounded-2xl  sm:bg-transparent sm:backdrop-blur-none sm:p-0">
+                <div className="flex flex-col items-center gap-6">
+                  <div className="w-32 h-36 sm:w-36 sm:h-40 lg:w-40 lg:h-44 rounded-xl overflow-hidden">
+                    <Image 
+                      src={IMG2} 
+                      alt="Brian Ngo" 
+                      className='w-full h-full object-cover'
+                      width={160}
+                      height={176}
+                    />
+                  </div>
+                  
+                  <h3 className="text-white text-3xl sm:text-4xl font-bold text-center">Jolie Joie</h3>
+                </div>
+                <div className="flex flex-col items-center gap-8">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-11 h-11 bg-[#ffd365] rounded-lg flex items-center justify-center p-2">
+                      <div className="w-6 h-6 bg-gray-800 rounded">🏆</div>
+                    </div>
+                    <span className="text-white text-sm">Earned 2,000 points</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3rd Place - David Do */}
+               <div className="flex flex-col items-center gap-8 bg-[rgba(23,28,41,0.8)] backdrop-blur-[10px] rounded-2xl  sm:bg-transparent sm:backdrop-blur-none sm:p-0">
+                <div className="flex flex-col items-center gap-6">
+                  <div className="w-32 h-36 sm:w-36 sm:h-40 lg:w-40 lg:h-44 rounded-xl overflow-hidden">
+                    <Image 
+                      src={IMG3} 
+                      alt="Brian Ngo" 
+                      className='w-full h-full object-cover'
+                      width={160}
+                      height={176}
+                    />
+                  </div>
+                  <h3 className="text-white text-2xl sm:text-3xl font-semibold text-center">David Do</h3>
+                </div>
+                <div className="flex flex-col items-center gap-8">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-11 h-11 bg-[#b38a48] rounded-lg flex items-center justify-center p-2">
+                      <div className="w-6 h-6 bg-gray-400 rounded">🏆</div>
+                    </div>
+                    <span className="text-white text-sm">Earned 2,000 points</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Bottom Section */}
+          <div className="px-4 sm:px-8 lg:px-16 pb-8 bg-[#0e0f15]">
+            {/* Divider Line */}
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent mb-8"></div>
+            
+            {/* Leaderboard Table */}
+            <div className="flex flex-col gap-6">
+              {/* Table Header */}
+              <div className="hidden sm:grid sm:grid-cols-5 gap-4 px-4 text-sm text-white/60">
+                <span>Rank</span>
+                <span>User name</span>
+                <span>Followers</span>
+                <span>Points</span>
+                <span>Reward</span>
+              </div>
               
-              {/* Avatar circle */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center text-2xl sm:text-3xl border-2 sm:border-4 border-purple-400 relative">
-                🥬
-                {/* Number 2 badge */}
-                <div className="absolute -top-2 sm:-top-3 -left-2 sm:-left-3 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold text-sm sm:text-lg border-2 border-white">
-                  2
+              {/* Table Rows */}
+              <div className="bg-[#171c29] rounded-xl p-2">
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 items-center p-4">
+                  <span className="text-white font-semibold text-lg sm:text-base">4</span>
+                  <div className="flex items-center gap-3 col-span-1 sm:col-span-1">
+                    <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-sm">
+                      👩‍💼
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-white text-sm font-medium">Henrietta O&apos;Connell</span>
+                      <span className="text-white/60 text-xs">@henrietta</span>
+                    </div>
+                  </div>
+                  <span className="text-white font-semibold text-right sm:text-left">12,241</span>
+                  <span className="text-white font-semibold text-right sm:text-left">2,114,424</span>
+                  <div className="col-span-2 sm:col-span-1 flex justify-end sm:justify-start">
+                    <button className="bg-[#21293d] hover:bg-[#2a3447] text-white font-semibold px-6 py-2 rounded-md transition-colors">
+                      1000
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#171c29] rounded-xl p-2">
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 items-center p-4">
+                  <span className="text-white font-semibold text-lg sm:text-base">5</span>
+                  <div className="flex items-center gap-3 col-span-1 sm:col-span-1">
+                    <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center text-sm">
+                      👨‍🔬
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-white text-sm font-medium">Darrel Bins</span>
+                      <span className="text-white/60 text-xs">@darrel</span>
+                    </div>
+                  </div>
+                  <span className="text-white font-semibold text-right sm:text-left">12,241</span>
+                  <span className="text-white font-semibold text-right sm:text-left">2,114,424</span>
+                  <div className="col-span-2 sm:col-span-1 flex justify-end sm:justify-start">
+                    <button className="bg-[#21293d] hover:bg-[#2a3447] text-white font-semibold px-6 py-2 rounded-md transition-colors">
+                      1000
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#171c29] rounded-xl p-2">
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 items-center p-4">
+                  <span className="text-white font-semibold text-lg sm:text-base">6</span>
+                  <div className="flex items-center gap-3 col-span-1 sm:col-span-1">
+                    <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-sm">
+                      👨‍💻
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-white text-sm font-medium">Alex Chen</span>
+                      <span className="text-white/60 text-xs">@alexchen</span>
+                    </div>
+                  </div>
+                  <span className="text-white font-semibold text-right sm:text-left">11,890</span>
+                  <span className="text-white font-semibold text-right sm:text-left">2,098,120</span>
+                  <div className="col-span-2 sm:col-span-1 flex justify-end sm:justify-start">
+                    <button className="bg-[#21293d] hover:bg-[#2a3447] text-white font-semibold px-6 py-2 rounded-md transition-colors">
+                      900
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#171c29] rounded-xl p-2">
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 items-center p-4">
+                  <span className="text-white font-semibold text-lg sm:text-base">7</span>
+                  <div className="flex items-center gap-3 col-span-1 sm:col-span-1">
+                    <div className="w-8 h-8 bg-gradient-to-r from-red-400 to-red-600 rounded-full flex items-center justify-center text-sm">
+                      👩‍🎨
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-white text-sm font-medium">Sarah Wilson</span>
+                      <span className="text-white/60 text-xs">@sarahw</span>
+                    </div>
+                  </div>
+                  <span className="text-white font-semibold text-right sm:text-left">11,456</span>
+                  <span className="text-white font-semibold text-right sm:text-left">2,045,890</span>
+                  <div className="col-span-2 sm:col-span-1 flex justify-end sm:justify-start">
+                    <button className="bg-[#21293d] hover:bg-[#2a3447] text-white font-semibold px-6 py-2 rounded-md transition-colors">
+                      800
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#171c29] rounded-xl p-2">
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 items-center p-4">
+                  <span className="text-white font-semibold text-lg sm:text-base">8</span>
+                  <div className="flex items-center gap-3 col-span-1 sm:col-span-1">
+                    <div className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full flex items-center justify-center text-sm">
+                      👨‍🚀
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-white text-sm font-medium">Mike Johnson</span>
+                      <span className="text-white/60 text-xs">@mikej</span>
+                    </div>
+                  </div>
+                  <span className="text-white font-semibold text-right sm:text-left">11,123</span>
+                  <span className="text-white font-semibold text-right sm:text-left">1,998,750</span>
+                  <div className="col-span-2 sm:col-span-1 flex justify-end sm:justify-start">
+                    <button className="bg-[#21293d] hover:bg-[#2a3447] text-white font-semibold px-6 py-2 rounded-md transition-colors">
+                      700
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            {/* Card */}
-            <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center w-28 sm:w-36 border border-slate-600">
-              <h3 className="text-white font-bold text-sm sm:text-lg mb-1">ThommyTom</h3>
-              <div className="flex items-center justify-center">
-                <span className="text-emerald-400 font-bold text-sm sm:text-lg">+200</span>
-                <div className="w-3 h-3 sm:w-5 sm:h-5 bg-emerald-400 rounded ml-2"></div>
-              </div>
-            </div>
-          </div>
-
-          {/* 1st Place */}
-          <div className="flex flex-col items-center -mt-4 sm:-mt-6">
-            <div className="relative">
-              {/* Crown */}
-              <div className="absolute -top-4 sm:-top-6 left-1/2 transform -translate-x-1/2 text-yellow-400 text-2xl sm:text-4xl">👑</div>
-              
-              {/* Avatar circle */}
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-r from-pink-400 to-pink-600 flex items-center justify-center text-3xl sm:text-4xl border-2 sm:border-4 border-yellow-400 relative">
-                🐷
-                {/* Number 1 badge */}
-                <div className="absolute -top-2 sm:-top-3 -left-2 sm:-left-3 w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center text-black font-bold text-lg sm:text-xl border-2 border-white">
-                  1
-                </div>
-              </div>
-            </div>
-            
-            {/* Card */}
-            <div className="bg-gradient-to-b from-yellow-500/20 to-orange-500/20 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 text-center w-32 sm:w-40 border border-yellow-400/50">
-              <h3 className="text-white font-bold text-lg sm:text-xl mb-1">Sparkles</h3>
-              <div className="flex items-center justify-center mb-2 sm:mb-3">
-                <span className="text-emerald-400 font-bold text-lg sm:text-xl">+250</span>
-                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-emerald-400 rounded ml-2"></div>
-              </div>
-              <div className="bg-yellow-600/80 text-yellow-100 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
-                You
-              </div>
-            </div>
-          </div>
-
-          {/* 3rd Place */}
-          <div className="flex flex-col items-center">
-            <div className="relative">
-              {/* Avatar circle */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center text-2xl sm:text-3xl border-2 sm:border-4 border-orange-400 relative">
-                🐯
-                {/* Number 3 badge */}
-                <div className="absolute -top-2 sm:-top-3 -left-2 sm:-left-3 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center text-white font-bold text-sm sm:text-lg border-2 border-white">
-                  3
-                </div>
-              </div>
-            </div>
-            
-            {/* Card */}
-            <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center w-28 sm:w-36 border border-slate-600">
-              <h3 className="text-white font-bold text-sm sm:text-lg mb-1">HarryBradley</h3>
-              <div className="flex items-center justify-center">
-                <span className="text-emerald-400 font-bold text-sm sm:text-lg">+150</span>
-                <div className="w-3 h-3 sm:w-5 sm:h-5 bg-emerald-400 rounded ml-2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Progress bar separator */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
-          <div className="h-1 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 rounded-full"></div>
-        </div>
-
-        {/* Rest of Rankings */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 space-y-2 sm:space-y-3">
-          <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
-            <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-slate-600 rounded flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl">
-                4
-              </div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-cyan-500 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
-                😎
-              </div>
-              <div>
-                <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">ShadowStorm</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
-            <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-slate-600 rounded flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl">
-                5
-              </div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-red-500 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
-                😡
-              </div>
-              <div>
-                <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">TempestFury</h4>
-              </div>
-            </div>
-            
-          </div>
-
-          <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center justify-between">
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-slate-600 rounded flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl">
-                6
-              </div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-green-500 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
-                🥬
-              </div>
-              <div>
-                <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">FrostyCold</h4>
-              </div>
-            </div>
-            
-          </div>
-
-          <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
-            <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-slate-600 rounded flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl">
-                7
-              </div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-pink-500 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
-                🐷
-              </div>
-              <div>
-                <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">Sparkles</h4>
-              </div>
-            </div>
-            
-          </div>
-
-          <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
-            <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-slate-600 rounded flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl">
-                8
-              </div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-gray-500 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
-                🤖
-              </div>
-              <div>
-                <h4 className="text-white font-semibold text-lg sm:text-xl lg:text-2xl">ArcadeCoinz</h4>
-              </div>
-            </div>
-            
           </div>
         </div>
       </div>
