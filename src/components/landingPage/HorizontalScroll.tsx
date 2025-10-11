@@ -100,15 +100,19 @@ export default function HorizontalScrollableCards() {
     if (!container) return;
 
     const handleScroll = () => {
-      const scrollLeft = container.scrollLeft;
-      const containerWidth = container.offsetWidth;
-      const scrollWidth = container.scrollWidth;
+  if (!container) return;
 
-      const scrollProgress = scrollLeft / (scrollWidth - containerWidth);
-      const currentCard = Math.ceil(scrollProgress * sampleDrinks.length) || 1;
+  const scrollLeft = container.scrollLeft;
+  const containerWidth = container.offsetWidth;
+  const scrollWidth = container.scrollWidth;
 
-      setter(Math.min(Math.max(currentCard, 1), sampleDrinks.length));
-    };
+  // approximate last visible card
+  const cardWidth = scrollWidth / sampleDrinks.length;
+  const lastVisibleIndex = Math.ceil((scrollLeft + containerWidth) / cardWidth);
+
+  setter(Math.min(Math.max(lastVisibleIndex, 1), sampleDrinks.length));
+};
+
 
     handleScroll();
     container.addEventListener("scroll", handleScroll);
