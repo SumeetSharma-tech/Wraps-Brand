@@ -3,11 +3,17 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { usePathname } from "next/navigation"
+
+// Inside your component
+
 
 interface DropdownOption {
   value: string
   label: string
 }
+
+
 
 interface DropdownButtonProps {
   options: DropdownOption[]
@@ -20,6 +26,7 @@ interface DropdownButtonProps {
   variant?: 'default' | 'outline' | 'secondary' | 'ghost'
   size?: 'sm' | 'default' | 'lg'
   dropupMode?: boolean // Force dropdown to appear upwards
+  disabled?: boolean
 }
 
 export function DropdownButton({
@@ -32,12 +39,15 @@ export function DropdownButton({
   dropdownClassName,
   variant = 'outline',
   size = 'default',
-  dropupMode = false
+  dropupMode = false,
+  disabled = false
 }: DropdownButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
     defaultOption ? options.find(opt => opt.value === defaultOption) || null : null
   )
+  const pathname = usePathname()
+const isSpecificPage = pathname === "/specific" 
   const [dropdownPosition, setDropdownPosition] = useState<'up' | 'down'>('down')
   const dropdownRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -78,7 +88,9 @@ export function DropdownButton({
   }, [isOpen, options.length, dropupMode])
 
   const handleToggleDropdown = () => {
-    setIsOpen(!isOpen)
+    if (!disabled) {
+      setIsOpen(!isOpen)
+    }
   }
 
   const handleOptionSelect = (option: DropdownOption) => {
@@ -88,6 +100,7 @@ export function DropdownButton({
   }
 
   const getButtonVariantClasses = () => {
+
     const baseClasses = "inline-flex items-center justify-between gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50"
     
     const variantClasses = {
@@ -98,9 +111,9 @@ export function DropdownButton({
     }
 
     const sizeClasses = {
-      sm: "h-8 px-3 text-xs",
-      default: "h-9 px-4 py-2",
-      lg: "h-10 px-6"
+      sm: "h-7 px-3 text-xs",
+      default: "h-10 md:h-12 px-4 py-2",
+      lg: "h-15 px-6"
     }
 
     return cn(baseClasses, variantClasses[variant], sizeClasses[size])
@@ -125,18 +138,21 @@ export function DropdownButton({
   }
 
   return (
-    <div className={cn("relative inline-block text-left", className)} ref={dropdownRef}>
+    
+    <div className={cn("relative  inline-block text-left", className)} ref={dropdownRef}>
       <button
         ref={buttonRef}
         type="button"
         className={cn(
-          getButtonVariantClasses(),
-          "w-full min-w-[90px] md:min-w-[200px] max-w-[100px] md:max-w-400px",
-          buttonClassName
-        )}
+    getButtonVariantClasses(),
+    "w-full min-w-[90px] md:min-w-[200px] max-w-[100px] md:max-w-[400px]",
+    isSpecificPage && "min-w-full",
+    buttonClassName
+  )}
         onClick={handleToggleDropdown}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
+        disabled={disabled}
       >
         <span className="truncate">
           {selectedOption ? selectedOption.label : placeholder}

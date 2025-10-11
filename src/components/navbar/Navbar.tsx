@@ -49,13 +49,13 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", throttledHandleScroll);
   }, [lastScrollY]);
 
-  const navItems: { label: string; path: string }[] = [
+  const navItems: { label: string; shortLabel?: string; path: string }[] = [
     { label: "Home", path: "/" },
-    { label: "Game Collection", path: "/gamecollections" },
-    { label: "Drinks", path: "/drinks" },
-    { label: "Orders", path: "/myOrders" },
+    { label: "Game Collection", shortLabel: "Game", path: "/gamecollections" },
+    { label: "All ", shortLabel: "All", path: "/All" },
+    { label: "Orders", path: "/my_orders" },
     { label: "Contact", path: "/contact" },
-    { label: "Collab", path: "/collab" },
+    { label: "LeaderBoard", path: "/leaderboard" },
   ];
 
   // Hardcode values for testing
@@ -102,7 +102,8 @@ const Navbar: React.FC = () => {
                         isActive ? "text-black" : "hover:bg-white/10 text-white"
                       }`}
                     >
-                      {item.label}
+                      <span className="xl:hidden">{item.shortLabel || item.label}</span>
+                      <span className="hidden xl:inline">{item.label}</span>
                       {isActive && (
                         <span className="absolute inset-0 bg-white z-[-1] rounded-full transition-all duration-300 ease-in-out scale-95 opacity-90"></span>
                       )}

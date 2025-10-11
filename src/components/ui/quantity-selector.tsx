@@ -66,12 +66,12 @@ export function QuantitySelector({
   };
 
   return (
-    <div className="flex h-[78%] items-center border border-gray-300 rounded-md">
+    <div className="flex h-10 md:h-12 items-center border border-gray-300 rounded-md">
       <button
         type="button"
         onClick={handleDecrease}
         disabled={quantity <= min}
-        className="p-1 sm:p-2 hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="p-1 h-fit sm:p-2 hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <ChevronDown className="w-4 h-4" />
       </button>

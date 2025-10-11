@@ -2,7 +2,10 @@
 import React, { useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Img from "../../../public/images/card.webp";
-
+import { DropdownButton } from "@/components/ui/dropdown-button-upward";
+import {useMemo} from "react";
+import { QuantitySelector } from "@/components/ui/quantity-selector";
+import { useRouter } from "next/navigation";
 type Drink = {
   id: number;
   name: string;
@@ -65,7 +68,33 @@ const ProductCard: React.FC<{ drink: Drink }> = ({ drink }) => {
   );
 };
 const ProductDetails = () => {
+  const phonebrand = useMemo(() => [
+      { value: "apple", label: "Apple" },
+      { value: "samsung", label: "Samsung" },
+      { value: "google", label: "Google" },
+      { value: "oneplus", label: "OnePlus" },
+      { value: "xiaomi", label: "Xiaomi" },
+    ], []);
+  
+    const model = useMemo(() => [
+      { value: "iphone-14", label: "iPhone 14" },
+      { value: "galaxy-s22", label: "Galaxy S22" },
+      { value: "pixel-7", label: "Pixel 7" },
+      { value: "oneplus-10", label: "OnePlus 10" },
+      { value: "mi-11", label: "Mi 11" },
+    ], []);
+  
+    const [selectedCategory, setSelectedCategory] = useState<string>("");
+    const [quantity, setQuantity] = useState<number>(1);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  const handleCategorySelect = (option: { value: string; label: string }) => {
+    setSelectedCategory(option.value);
+  };
+
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+  };
 
   // Dummy drinks data
   const drinks = [
@@ -156,20 +185,44 @@ const ProductDetails = () => {
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-4">
-              <button
-                onClick={() => handleAddToCart(drink)}
-                className="bg-lime-400 active:scale-95 cursor-pointer text-black px-6 py-2 rounded hover:bg-lime-500 transition font-semibold"
-              >
-                Add to Cart
-              </button>
-              <button
-                onClick={() => handleAddToCart(drink)}
-                className="relative overflow-hidden border border-white px-6 py-2 rounded font-semibold text-white transition-all duration-800 group"
-              >
-                Buy Now
-              </button>
-            </div>
+            <div className="sm:flex-row sm:items-center gap-4 w-full">
+  {/* Dropdowns + Quantity */}
+  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 flex-1 mb-4">
+    <DropdownButton
+      className="flex-1"
+      onSelect={handleCategorySelect}
+      options={phonebrand}
+      placeholder="Select Brand"
+      variant="outline"
+      dropupMode={true}
+    />
+    <DropdownButton
+      className="flex-1"
+      onSelect={handleCategorySelect}
+      options={phonebrand}
+      placeholder="Select Brand"
+      variant="outline"
+      dropupMode={true}
+    />
+    
+  </div>
+
+  {/* Buttons */}
+  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+    <button
+      onClick={() => handleAddToCart(drink)}
+      className="bg-lime-400 active:scale-95 cursor-pointer text-black px-6 py-2 rounded hover:bg-lime-500 transition font-semibold w-full sm:w-auto text-center"
+    >
+      Add to Cart
+    </button>
+    <button
+      onClick={() => handleAddToCart(drink)}
+      className="relative overflow-hidden border border-white px-6 py-2 rounded font-semibold text-white transition-all duration-800 group w-full sm:w-auto text-center"
+    >
+      Buy Now
+    </button>
+  </div>
+</div>
 
             {/* Description */}
             <div className="space-y-3">

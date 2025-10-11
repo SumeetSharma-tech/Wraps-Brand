@@ -124,7 +124,7 @@ export default function GameCollections() {
           >
             {sampleDrinks.map((d) => (
               <div role="listitem" key={d.id} className="snap-start">
-                <ProductCard drink={d} onClickPath="/Specific_Secction" />
+                <ProductCard drink={d} onClickPath="/Specific_Collection" />
               </div>
             ))}
           </div>

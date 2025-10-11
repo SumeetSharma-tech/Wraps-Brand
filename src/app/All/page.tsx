@@ -4,6 +4,8 @@ import Navbar from "../../components/navbar/Navbar";
 import FiltersContent from "../../components/FiltersContent";
 import { FaSpinner } from "react-icons/fa";
 import Img from "../../../public/images/card.webp";
+import Filter from '../../../public/filter.svg'
+
 
 
 type Drink = {
@@ -72,7 +74,42 @@ const Drinks = () => {
   { id: 7, name: "Cinnamon Spice", image: Img.src, price: 179, Link: "/specific/7" },
   { id: 8, name: "Coconut Macchiato", image: Img.src, price: 249, Link: "/specific/8" },
   // extra for variety
-  { id: 9, name: "Almond Breve", image: Img.src, price: 239, Link: "/specific/9" },
+  { id: 10, name: "Almond Breve", image: Img.src, price: 239, Link: "/specific/9" },
+  { id: 11, name: "Caramel Latte", image: Img.src, price: 199, Link: "/specific/1" },
+  { id: 12, name: "Iced Americano", image: Img.src, price: 149, Link: "/specific/2" },
+  { id: 13, name: "Matcha Frappe", image: Img.src, price: 229, Link: "/specific/3" },
+  { id: 14, name: "Vanilla Cold Brew", image: Img.src, price: 189, Link: "/specific/4" },
+  { id: 15, name: "Mocha Delight", image: Img.src, price: 209, Link: "/specific/5" },
+  { id: 16, name: "Hazelnut Cappuccino", image: Img.src, price: 219, Link: "/specific/6" },
+  { id: 17, name: "Cinnamon Spice", image: Img.src, price: 179, Link: "/specific/7" },
+  { id: 18, name: "Coconut Macchiato", image: Img.src, price: 249, Link: "/specific/8" },
+  // extra for variety
+  { id: 19, name: "Almond Breve", image: Img.src, price: 239, Link: "/specific/9" },
+  { id: 20, name: "Caramel Latte", image: Img.src, price: 199, Link: "/specific/1" },
+  { id: 21, name: "Iced Americano", image: Img.src, price: 149, Link: "/specific/2" },
+  { id: 22, name: "Matcha Frappe", image: Img.src, price: 229, Link: "/specific/3" },
+  { id: 23, name: "Vanilla Cold Brew", image: Img.src, price: 189, Link: "/specific/4" },
+  { id: 24, name: "Mocha Delight", image: Img.src, price: 209, Link: "/specific/5" },
+  { id: 25, name: "Hazelnut Cappuccino", image: Img.src, price: 219, Link: "/specific/6" },
+  { id: 26, name: "Cinnamon Spice", image: Img.src, price: 179, Link: "/specific/7" },
+  { id: 27, name: "Coconut Macchiato", image: Img.src, price: 249, Link: "/specific/8" },
+  // extra for variety
+  { id: 28, name: "Almond Breve", image: Img.src, price: 239, Link: "/specific/9" },
+  { id: 29, name: "Caramel Latte", image: Img.src, price: 199, Link: "/specific/1" },
+  { id: 30, name: "Iced Americano", image: Img.src, price: 149, Link: "/specific/2" },
+  { id: 31, name: "Matcha Frappe", image: Img.src, price: 229, Link: "/specific/3" },
+  { id: 32, name: "Vanilla Cold Brew", image: Img.src, price: 189, Link: "/specific/4" },
+  { id: 33, name: "Mocha Delight", image: Img.src, price: 209, Link: "/specific/5" },
+  { id: 34, name: "Hazelnut Cappuccino", image: Img.src, price: 219, Link: "/specific/6" },
+  { id: 35, name: "Cinnamon Spice", image: Img.src, price: 179, Link: "/specific/7" },
+  { id: 36, name: "Coconut Macchiato", image: Img.src, price: 249, Link: "/specific/8" },
+
+  // extra for variety
+  { id: 37, name: "Almond Breve", image: Img.src, price: 239, Link: "/specific/9" },
+  { id: 38, name: "Caramel Latte", image: Img.src, price: 199, Link: "/specific/1" },
+  { id: 39, name: "Iced Americano", image: Img.src, price: 149, Link: "/specific/2" },
+  { id: 40, name: "Matcha Frappe", image: Img.src, price: 229, Link: "/specific/3" },
+  { id: 41, name: "Vanilla Cold Brew", image: Img.src, price: 189, Link: "/specific/4" },
   ];
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -183,14 +220,14 @@ const drinksToRender = drink;
       >
         <img
           className="w-5 h-5 object-contain"
-          src="/monster-resources-hackathon/filter-svgrepo-com.svg"
+          src={Filter.src}
           alt="Filter"
         />
       </div>
     </div>
   </div>
 
-  <div className="grid grid-cols-2 ml-3 mr-3 md:ml-7 md:mr-7 xl:ml-10 sm:grid-cols-3 xl:grid-cols-4 gap-6 -mb-6">
+  <div className="grid grid-cols-2 ml-3 mr-3 md:ml-7 md:mr-7 xl:ml-10 sm:grid-cols-3 xl:grid-cols-4 gap-6 -mb-8">
     {drinksToRender
       .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
       .map((drink) => (

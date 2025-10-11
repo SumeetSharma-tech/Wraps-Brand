@@ -139,7 +139,7 @@ export default function HorizontalScrollableCards() {
 <h1
           className={`${JersyFont.className} text-[#9AE600] text-3xl min-[290px]:text-5xl sm:text-7xl  lg:text-8xl`}
         >
-          BROWSE ALL COLLECTIONS
+          BROWSE ALL PRODUCTS
         </h1>
 
       </div>
