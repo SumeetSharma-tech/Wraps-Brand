@@ -7,31 +7,27 @@ import {
   FaInstagram,
   FaYoutube,
 } from "react-icons/fa";
+import localFont from "next/font/local";
 import CurvedLoop from "../../components/contactcomp/CurvedLoop";
+
+ const JersyFont = localFont({ 
+  src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
+  display: "swap",
+});
 
 const Contact = () => {
   return (
     <div className="bg-[#090701] text-white min-h-screen">
       <Navbar />
-      <div className="font-sans">
-        {/* Green Navigation Strip */}
-        <nav className="bg-lime-400  h-13 text-black text-lg font-semibold md:flex flex-wrap justify-center gap-6 py-2">
-          <CurvedLoop
-            marqueeText="Unleash      ✦The     ✦ Beast      ✦ With       ✦ Monster      ✦"
-            speed={2}
-            curveAmount={-5}
-            direction="left"
-            draggable={false}
-            className="custom-text-style"
-          />
-        </nav>
+      <div className="font-sans ">
+       
 
         {/* Main Section */}
-        <section className="bg-[#090701] text-white py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 flex flex-col lg:flex-row gap-8 items-start">
+        <section className="bg-[#090701] text-white -mt-10 py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-36 flex flex-col lg:flex-row gap-8 items-start">
           {/* Left: Form */}
-          <div className="w-full md:w-2/3">
+          <div className="w-full  md:w-2/3">
             <p className="text-black text-sm mb-2">Contact Us</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 leading-snug">
+            <h2 className={` ${JersyFont.className} text-[#9AE600] text-6xl font-semibold mb-6 leading-snug`}>
               Join Us in Creating <br /> Something Great
             </h2>
 
@@ -80,16 +76,7 @@ const Contact = () => {
                 <button className="bg-lime-400 hover:cursor-pointer active:scale-95 text-black font-semibold px-6 py-3 rounded-full w-fit">
                   Send Message
                 </button>
-                <button
-                  type="reset"
-                  className="bg-zinc-800 hover:cursor-pointer active:scale-95 text-black font-semibold px-4 py-3 rounded-full"
-                >
-                  <img
-                    className="w-5"
-                    src="/monster-resources-hackathon/right-arrow-svgrepo-com.svg"
-                    alt=""
-                  />
-                </button>
+               
               </div>
             </form>
           </div>
@@ -164,17 +151,7 @@ const Contact = () => {
         </section>
 
         {/* Bottom Curved Marquee */}
-        <nav className="bg-lime-400 h-13 text-white text-lg font-semibold md:flex flex-wrap justify-center gap-6 py-2">
-          <CurvedLoop
-            marqueeText="Energy       ✦ That       ✦ Hits       ✦ Hard       ✦ Monster      ✦ Style      ✦
-"
-            speed={2}
-            curveAmount={-5}
-            direction="left"
-            draggable={false}
-            className="select-none pointer-events-none"
-          />
-        </nav>
+        
       </div>
     </div>
   );
