@@ -105,7 +105,7 @@ const MyOrders = () => {
     <div className="bg-[#090701] min-h-screen overflow-hidden text-white">
       <Navbar />
       <div className="min-h-screen py-10 px-6 lg:px-20">
-        <h1 className={` ${JersyFont.className} text-[#9AE600]  text-4xl font-bold mb-10`}>My Orders</h1>
+        <h1 className={` ${JersyFont.className} text-[#9AE600]  text-5xl font-bold mb-10`}>My Orders</h1>
 
         {orders.length === 0 ? (
           <p className="text-center text-gray-500">No orders found.</p>
