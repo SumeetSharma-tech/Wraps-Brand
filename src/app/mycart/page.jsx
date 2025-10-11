@@ -50,7 +50,7 @@ image: IMg,
     <div className="bg-[#090701] overflow-hidden max-h-screen">
       <Navbar />
       <div className="min-h-screen text-white px-4 md:px-12 py-8 overflow-hidden">
-        <h1 className={` ${JersyFont.className} text-4xl font-bold mb-8`}>Shopping Cart</h1>
+        <h1 className={` ${JersyFont.className} text-[#9AE600]  text-4xl font-bold mb-8`}>Shopping Cart</h1>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Cart Items */}
           <div className="flex-1 bg-[#131313] p-6 rounded-lg">
