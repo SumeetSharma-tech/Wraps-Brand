@@ -13,7 +13,7 @@ const JersyFont = localFont({
 export default function Review() {
   return (
     <>
-    <div className={`{${JersyFont.className} flex justify-center items-center mt-2`}>
+    <div className={`{${JersyFont.className} flex justify-center items-center mt-2 -mb-30`}>
         <h1
           className={`${JersyFont.className} pl-2 text-[#9AE600] text-3xl sm:text-5xl md:text-6xl xl:text-8xl  mt-4 `}
         >
@@ -21,7 +21,7 @@ export default function Review() {
         </h1>
     </div>
     <div
-      className="h-[40rem] -mt-40 rounded-md flex flex-col antialiased  items-center justify-center relative overflow-hidden">
+      className="h-[40rem] -mt-40 -mb-50 rounded-md flex flex-col antialiased  items-center justify-center relative overflow-hidden">
       <InfiniteMovingCards className="w-full" items={testimonials} direction="right" speed="slow" />
     </div>
     </>

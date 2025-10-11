@@ -25,7 +25,7 @@ export function BuyNowButton({
         ${className}
       `}
     >
-      Buy Now
+      Add Cart
     </button>
   );
 }

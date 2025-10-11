@@ -1,5 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // 1️⃣ Define the item shape
 interface InfiniteMovingCardItem {
@@ -19,111 +21,103 @@ interface InfiniteMovingCardsProps {
 
 export const InfiniteMovingCards: React.FC<InfiniteMovingCardsProps> = ({
   items,
-  direction = "right", // Changed default to "right" for opposite flow
+  direction = "right",
   speed = "fast",
   pauseOnHover = true,
   className
 }) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLUListElement>(null);
-
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
   const [start, setStart] = useState(false);
 
+  // Drag-to-scroll states
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // Initialize animation and starting scroll
   useEffect(() => {
-    addAnimation();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!containerRef.current || !scrollerRef.current) return;
+
+    const scrollerContent = Array.from(scrollerRef.current.children);
+
+    // Duplicate items for infinite scroll
+    scrollerContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true);
+      scrollerRef.current?.appendChild(duplicatedItem);
+    });
+
+    // Set initial scroll to middle
+    const container = containerRef.current;
+    const scrollWidth = scrollerRef.current.scrollWidth;
+    container.scrollLeft = scrollWidth / 4; // middle of original items
+
+    // Apply speed and direction
+    applyDirection();
+    applySpeed();
+
+    setStart(true);
   }, []);
 
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        scrollerRef.current?.appendChild(duplicatedItem);
-      });
-
-      getDirection();
-      getSpeed();
-      setStart(true);
-    }
-  }
-
-  const getDirection = () => {
-    if (containerRef.current) {
-      // Reversed the logic: "right" now uses "forwards", "left" uses "reverse"
-      containerRef.current.style.setProperty(
-        "--animation-direction",
-        direction === "right" ? "forwards" : "reverse"
-      );
-    }
+  const applyDirection = () => {
+    if (!containerRef.current) return;
+    containerRef.current.style.setProperty(
+      "--animation-direction",
+      direction === "right" ? "forwards" : "reverse"
+    );
   };
 
-  const getSpeed = () => {
-    if (containerRef.current) {
-      const duration =
-        speed === "fast" ? "20s" : speed === "normal" ? "40s" : "80s";
-      containerRef.current.style.setProperty("--animation-duration", duration);
-    }
+  const applySpeed = () => {
+    if (!containerRef.current) return;
+    const duration =
+      speed === "fast" ? "20s" : speed === "normal" ? "40s" : "80s";
+    containerRef.current.style.setProperty("--animation-duration", duration);
   };
 
-  // Handle scroll events to pause animation on manual scroll
+  // Pause animation on scroll
   const handleScroll = () => {
     if (containerRef.current) {
       containerRef.current.style.animationPlayState = "paused";
     }
   };
 
-  // Drag-to-scroll functionality
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
+  // Drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     setStartX(e.clientX);
     if (containerRef.current) {
       setScrollLeft(containerRef.current.scrollLeft);
-      // Pause animation when starting to drag
       containerRef.current.style.animationPlayState = "paused";
     }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    e.preventDefault(); // Prevent text selection while dragging
+    if (!isDragging || !containerRef.current) return;
+    e.preventDefault();
     const moveX = e.clientX - startX;
-    if (containerRef.current) {
-      containerRef.current.scrollLeft = scrollLeft - moveX;
-    }
+    containerRef.current.scrollLeft = scrollLeft - moveX;
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    // Resume animation when drag ends
-    if (containerRef.current) {
-      containerRef.current.style.animationPlayState = "running";
-    }
+    if (containerRef.current) containerRef.current.style.animationPlayState = "running";
   };
 
   const handleMouseLeave = () => {
     setIsDragging(false);
-    // Resume animation when mouse leaves
-    if (containerRef.current) {
-      containerRef.current.style.animationPlayState = "running";
-    }
+    if (containerRef.current) containerRef.current.style.animationPlayState = "running";
   };
 
   return (
     <div
       ref={containerRef}
-      onScroll={handleScroll} // Pause animation on scroll
-      onMouseDown={handleMouseDown} // Start drag
-      onMouseMove={handleMouseMove} // Handle drag movement
-      onMouseUp={handleMouseUp} // End drag
-      onMouseLeave={handleMouseLeave} // End drag if mouse leaves the container
+      onScroll={handleScroll}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
       className={cn(
-        "scroller relative z-20 max-w-7xl overflow-x-auto py-4 cursor-grab active:cursor-grabbing", // Added cursor styles for better UX
+        "scroller relative z-20 max-w-7xl overflow-x-auto py-4 cursor-grab active:cursor-grabbing",
         className
       )}
     >
@@ -137,8 +131,8 @@ export const InfiniteMovingCards: React.FC<InfiniteMovingCardsProps> = ({
       >
         {items.map((item, index) => (
           <li
+            key={`${item.name}-${index}`}
             className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]"
-            key={`${item.name}-${index}`} // Better key to handle duplicate names
           >
             <blockquote>
               <div
