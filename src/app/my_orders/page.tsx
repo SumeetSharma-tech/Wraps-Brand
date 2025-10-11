@@ -2,6 +2,11 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { Download, ClipboardCopy, CheckCircle2, Loader2 } from "lucide-react";
+import localFont from "next/font/local";
+const JersyFont = localFont({
+  src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
+  display: "swap",
+});
 
 // Define the order type
 type Product = {
@@ -100,7 +105,7 @@ const MyOrders = () => {
     <div className="bg-[#090701] min-h-screen overflow-hidden text-white">
       <Navbar />
       <div className="min-h-screen py-10 px-6 lg:px-20">
-        <h1 className="text-4xl font-bold mb-10">My Orders</h1>
+        <h1 className={` ${JersyFont.className} text-[#9AE600]  text-4xl font-bold mb-10`}>My Orders</h1>
 
         {orders.length === 0 ? (
           <p className="text-center text-gray-500">No orders found.</p>
