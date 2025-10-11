@@ -159,7 +159,7 @@ const drinksToRender = drink;
   };
 
   return (
-    <div className="bg-[#090701] text-white min-h-screen">
+    <div className="bg-[#090701] text-white min-h-screen w-full max-w-full overflow-x-hidden">
       <Navbar />
 
       <div className="flex flex-col lg:flex-row">
