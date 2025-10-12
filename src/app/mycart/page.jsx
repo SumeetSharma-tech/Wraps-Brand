@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import OrderSummary from "../../components/orderSummary";
 import Navbar from "../../components/navbar/Navbar";
@@ -14,6 +14,11 @@ const JersyFont = localFont({
 const CartPage = () => {
 
   const router = useRouter();
+
+  // Scroll to top on component mount (page reload)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const cartItems = [
 {
@@ -53,7 +58,7 @@ image: IMg,
 
   return (
 
-    <div className="bg-[#090701] overflow-hidden max-h-screen">
+    <div className="bg-[#090701] overflow-x-hidden max-h-screen">
       <Navbar />
       <div className="min-h-screen text-white px-4 md:px-12 py-8 overflow-hidden">
         <h1
