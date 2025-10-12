@@ -58,9 +58,9 @@ image: IMg,
 
   return (
 
-    <div className="bg-[#090701] overflow-x-hidden max-h-screen">
+    <div className="bg-[#090701] overflow-x-hidden">
       <Navbar />
-      <div className="min-h-screen text-white px-4 md:px-12 py-8 overflow-hidden">
+      <div className="min-h-screen text-white px-4 md:px-12 py-8">
         <h1
   className={`${JersyFont.className} text-[#9AE600] text-4xl font-bold mb-8 tracking-[1px]`}
 >
