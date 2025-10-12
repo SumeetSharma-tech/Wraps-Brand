@@ -5,12 +5,16 @@ import OrderSummary from "../../components/orderSummary";
 import Navbar from "../../components/navbar/Navbar";
 import IMg from "../../../public/images/card.webp"
 import localFont from "next/font/local";
+import {useRouter} from 'next/navigation';
 
 const JersyFont = localFont({
   src: "../../../public/fonts/jersey-10-latin-400-normal.woff2",
   display: "swap",
 });
 const CartPage = () => {
+
+  const router = useRouter();
+
   const cartItems = [
 {
 id: 1,
@@ -46,11 +50,18 @@ image: IMg,
   const discountAmount = (subtotal * discountPercent) / 100;
   const totalCost = subtotal - discountAmount + shipping;
 
+
   return (
+
     <div className="bg-[#090701] overflow-hidden max-h-screen">
       <Navbar />
       <div className="min-h-screen text-white px-4 md:px-12 py-8 overflow-hidden">
-        <h1 className={` ${JersyFont.className} text-[#9AE600]  text-4xl font-bold mb-8`}>Shopping Cart</h1>
+        <h1
+  className={`${JersyFont.className} text-[#9AE600] text-4xl font-bold mb-8 tracking-[1px]`}
+>
+  Shopping Cart
+</h1>
+
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Cart Items */}
           <div className="flex-1 bg-[#131313] p-6 rounded-lg">
@@ -70,7 +81,7 @@ image: IMg,
                 key={item.id}
                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-b border-gray-700"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 cursor-pointer">
                   <img
                     src={item.image.src}
                     alt={item.name}
@@ -103,7 +114,7 @@ image: IMg,
                     </button>
                   </div>
 
-                  <div className="text-right min-w-[100px]">
+                  <div className="text-right min-w-[100px] cursor-pointer">
                     <p>₹{item.price.toFixed(2)}</p>
                     <p className="text-sm text-gray-400">
                       Total: ₹{(item.price * item.quantity).toFixed(2)}
@@ -126,7 +137,7 @@ image: IMg,
           />
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 cursor-pointer" onClick={() => router.push('/All')}  >
           
             ← Continue Shopping
          

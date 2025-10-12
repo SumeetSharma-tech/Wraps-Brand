@@ -417,6 +417,11 @@ class App {
     this.scene = new Transform();
   }
   onClick(e) {
+  // Check if we're on the Specific_Collection page - if so, disable redirects
+  if (window && window.location && window.location.pathname === '/Specific_Collection') {
+    return; // Exit early, no redirect
+  }
+
   // Detect which card is currently in center (you already track it)
   const centerIndex = this.currentCardIndex % (this.medias.length / 2);
   const clickedCard = this.medias[centerIndex];

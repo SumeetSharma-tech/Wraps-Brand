@@ -36,13 +36,13 @@ const ProductCard: React.FC<{ drink: Drink; onClickPath?: string }> = ({ drink, 
   return (
     <a
       onClick={() => router.push(onClickPath ?? "/Specific_Collection")}
-      className="group relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[270px] w-[180px] snap-start"
+      className="group cursor-pointer relative bg-[#1a1816] rounded-2xl p-4 text-white shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 duration-300 flex flex-col h-[270px] w-[180px] snap-start"
     >
-      <div className="relative overflow-hidden rounded-xl h-[290px]">
+      <div className="mouse-pointer relative overflow-hidden rounded-xl h-[290px]">
         <img
           src={drink.image}
           alt={drink.name}
-          className="w-full h-full object-cover"
+          className="w-full mouse-pointer h-full object-cover"
         />
         <p className="absolute bottom-3 left-3 text-white text-sm font-semibold bg-black/60 px-2 py-1 rounded">
           ₹{drink.price}
