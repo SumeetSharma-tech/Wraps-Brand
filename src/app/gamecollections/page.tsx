@@ -77,12 +77,22 @@ const ProductCard: React.FC<{ drink: Drink; onClickPath?: string }> = ({ drink, 
 export default function GameCollections() {
   const router = useRouter();
 
-  // Each row has its own currentIndex state
-  const [currentIndex1, setCurrentIndex1] = useState(1);
-  const [currentIndex2, setCurrentIndex2] = useState(1);
-  const [currentIndex3, setCurrentIndex3] = useState(1);
-  const [currentIndex4, setCurrentIndex4] = useState(1);
-  const [currentIndex5, setCurrentIndex5] = useState(1);
+  // Calculate initial visible cards (assuming ~3-4 cards are visible initially on most screens)
+  const getInitialVisibleCards = () => {
+    if (typeof window !== 'undefined') {
+      const screenWidth = window.innerWidth;
+      const cardWidth = 210; // card width + gap
+      return Math.min(Math.ceil(screenWidth / cardWidth), sampleDrinks.length);
+    }
+    return 3; // fallback for SSR
+  };
+
+  // Each row has its own currentIndex state (starting with estimated visible cards)
+  const [currentIndex1, setCurrentIndex1] = useState(getInitialVisibleCards());
+  const [currentIndex2, setCurrentIndex2] = useState(getInitialVisibleCards());
+  const [currentIndex3, setCurrentIndex3] = useState(getInitialVisibleCards());
+  const [currentIndex4, setCurrentIndex4] = useState(getInitialVisibleCards());
+  const [currentIndex5, setCurrentIndex5] = useState(getInitialVisibleCards());
 
   const containerRef1 = useRef<HTMLDivElement | null>(null);
   const containerRef2 = useRef<HTMLDivElement | null>(null);
@@ -97,13 +107,22 @@ export default function GameCollections() {
     currentIndex: number,
     setCurrentIndex: React.Dispatch<React.SetStateAction<number>>
   ) => {
-    // Scroll handler to update currentIndex
+    // Scroll handler to update currentIndex to show last visible card
     const handleScroll = () => {
       if (!containerRef.current) return;
-      const scrollLeft = containerRef.current.scrollLeft;
+      const container = containerRef.current;
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
       const cardWidth = 210; // Approximate width of card + gap
-      const newIndex = Math.round(scrollLeft / cardWidth) + 1; // 1-based index
-      setCurrentIndex(newIndex);
+      
+      // Calculate the last visible card index
+      const lastVisiblePosition = scrollLeft + containerWidth;
+      const lastVisibleIndex = Math.min(
+        Math.ceil(lastVisiblePosition / cardWidth),
+        sampleDrinks.length
+      );
+      
+      setCurrentIndex(lastVisibleIndex);
     };
 
     return (

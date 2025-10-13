@@ -182,46 +182,16 @@ const drinksToRender = drink;
               </button>
               <h2 className="text-xl font-bold mb-4 text-center">Filters</h2>
               <FiltersContent />
+
             </div>
           </div>
         )}
 
         {/* Main Content */}
         <main className="w-full h-full lg:w-4/5 space-y-10">
-          {/* Promo Section */}
-          <div className="text-white md:h-[30vh] rounded-lg p-6 flex flex-col lg:flex-row justify-between items-center">
-            <div className="text-center lg:text-left mb-4 lg:mb-0">
-              <h1 className="text-3xl font-bold">Pure Energy Big Discount</h1>
-              <p className="text-lg mt-2">Save up to 50% off on your first order</p>
-              <div className="mt-4 flex items-center gap-2 justify-center lg:justify-start">
-                <input
-                  type="email"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  placeholder="Your email address"
-                  className="p-2 w-35 md:w-auto border focus:border-lime-400 outline-none border-gray-400 rounded"
-                />
-                <button
-                  onClick={handleGetCoupon}
-                  disabled={cooldown}
-                  className={`px-4 py-2 rounded text-black ${
-                    cooldown ? "bg-gray-400 cursor-not-allowed" : "bg-lime-400 hover:bg-lime-500"
-                  }`}
-                >
-                  {cooldown ? "Wait..." : "Get Coupon"}
-                </button>
-              </div>
-            </div>
-            <img
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjs9xYUoN65O3g0X9X5QkfMgDng7TEvoA96XGFv8VniRE9rCA9Kxd4pN-_2gGwmGP2kDENm2uvWtW-A2M_WkQ6OXrzKN-cEekF11s_d0J4Vwj2RfaIjIgAylcY5InD7DtPo2zZUz7NjDEQ/s1600/Tickle_LasVegas_Cox_2011_077.jpg"
-              alt="Discount"
-              className="h-35 w-35 object-cover rounded-lg hidden lg:block"
-            />
-          </div>
-
           {/* Product Grid */}
 <div>
-  <div className="flex items-center justify-between mb-2">
+  <div className="flex items-center justify-between mb-2 mt-5">
     <h2 className="text-2xl font-bold ml-3  md:ml-7 xl:ml-10">Popular Products</h2>
 
     {/* Mobile filter toggle */}

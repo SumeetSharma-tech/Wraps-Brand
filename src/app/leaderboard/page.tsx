@@ -46,14 +46,14 @@ const LeaderboardPage = () => {
                 </h3>
                 
                 {/* Stats aligned with table */}
-                <div className="grid grid-cols-2 gap-4 w-full text-center">
-                  <div className="flex flex-col items-center">
-                    <div className={`w-10 h-10 ${user.bgColor} rounded-lg flex items-center justify-center`}>
+                <div className="gap-4 ml-10 w-full text-center">
+                  <div className="flex gap-2  items-center">
+                    <div className={`w-10 h-10 ${user.bgColor} rounded-lg flex items-center justify-center mb-2`}>
                       {user.trophy}
                     </div>
                     <span className="text-white text-sm font-bold">{user.plates} Plates</span>
                   </div>
-                  <div className="flex flex-col items-center">
+                  <div className="flex gap-2 items-center">
                     {user.chars !== null && (
                       <>
                         <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">🃏</div>
@@ -79,10 +79,10 @@ const LeaderboardPage = () => {
             </div>
 
             {/* Table Rows */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {leaderboardRows.map((user) => (
                 <div key={user.rank} className="bg-[#171c29] rounded-xl p-2">
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-center p-4 text-white text-sm">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-center p-4 text-white text-sm">
                     <span className="font-semibold">{user.rank}</span>
                     <div className="flex items-center gap-3">
                       <div className={`w-8 h-8 bg-gradient-to-r ${user.color} rounded-full flex items-center justify-center text-sm`}>
