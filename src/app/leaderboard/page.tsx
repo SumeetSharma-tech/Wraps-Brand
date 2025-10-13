@@ -71,7 +71,7 @@ const LeaderboardPage = () => {
             <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent mb-8"></div>
 
             {/* Table Header */}
-            <div className="hidden sm:grid sm:grid-cols-4 gap-4 px-4 text-sm text-white/60 font-medium">
+            <div className="grid grid-cols-4  px-4 text-sm text-white/60 font-medium">
               <span>Rank</span>
               <span>User name</span>
               <span>Plates Collected</span>
@@ -82,8 +82,8 @@ const LeaderboardPage = () => {
             <div className="flex flex-col gap-3">
               {leaderboardRows.map((user) => (
                 <div key={user.rank} className="bg-[#171c29] rounded-xl p-2">
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-center p-4 text-white text-sm">
-                    <span className="font-semibold">{user.rank}</span>
+                  <div className="grid grid-cols-4  items-center p-4 text-white text-sm">
+                    <span className="font-semibold -mr-20">{user.rank}</span>
                     <div className="flex items-center gap-3">
                       <div className={`w-8 h-8 bg-gradient-to-r ${user.color} rounded-full flex items-center justify-center text-sm`}>
                         {user.emoji}
