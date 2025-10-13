@@ -27,7 +27,7 @@ const Contact = () => {
           {/* Left: Form */}
           <div className="w-full  md:w-2/3">
             <p className="text-black text-sm mb-2">Contact Us</p>
-            <h2 className={` ${JersyFont.className} text-[#9AE600] text-xl min-[210px]:text-3xl text-6xl font-semibold mb-6 leading-snug`}>
+            <h2 className={` ${JersyFont.className} text-[#9AE600] text-xl min-[240px]:text-3xl text-6xl font-semibold mb-6 leading-snug`}>
               Join Us in Creating <br /> Something Great
             </h2>
 
